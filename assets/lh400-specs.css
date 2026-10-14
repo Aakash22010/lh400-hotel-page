@@ -1,0 +1,57 @@
+/* ==========================================================================
+   LH400 - Lock specifications
+   Figma: panel 1344x451 (pad 27/42/41), white box 1252x315 in three columns
+   ========================================================================== */
+
+.lh-specs .lh-specs__panel{ padding: calc(2.7 * var(--lh-u)) calc(4.2 * var(--lh-u)) calc(4.1 * var(--lh-u)); }
+.lh-specs .lh-specs__title{ font: 600 calc(3.6 * var(--lh-u))/calc(4.4 * var(--lh-u)) var(--lh-font); color: #000; text-transform: capitalize; }
+
+/* White box - three columns split by #a7a7a7 rules */
+.lh-specs .lh-specs__box{
+  display: grid; grid-template-columns: 44.1fr 44.6fr 32.6fr;
+  margin-top: calc(2.4 * var(--lh-u)); padding: calc(2.8 * var(--lh-u)) 0 calc(1.6 * var(--lh-u)) calc(3.9 * var(--lh-u));
+  background: #fff; border: calc(0.1 * var(--lh-u)) solid var(--lh-line); border-radius: calc(2.4 * var(--lh-u));
+}
+/* Each column is a label/value grid; --lw = that column's label width from Figma */
+.lh-specs .lh-specs__col{
+  display: grid; grid-template-columns: minmax(min-content, var(--lw)) minmax(max-content, auto); align-content: start; min-width: 0; padding-right: calc(2 * var(--lh-u)); --lw: calc(24 * var(--lh-u));
+}
+.lh-specs .lh-specs__col + .lh-specs__col{ border-left: calc(0.1 * var(--lh-u)) solid var(--lh-line); padding-left: calc(3.4 * var(--lh-u)); }
+.lh-specs .lh-specs__col:nth-child(2){ --lw: calc(27 * var(--lh-u)); }
+.lh-specs .lh-specs__col:nth-child(3){ --lw: calc(16.6 * var(--lh-u)); padding-left: calc(3.6 * var(--lh-u)); padding-right: var(--lh-u); }
+
+/* Group headings - a rule above every heading except the first in its column */
+.lh-specs .lh-specs__heading{
+  grid-column: 1 / -1; contain: inline-size;
+  font: 600 calc(2.5 * var(--lh-u))/calc(3.6 * var(--lh-u)) var(--lh-font-alt); color: var(--lh-blue); text-transform: uppercase; margin-bottom: calc(0.9 * var(--lh-u));
+}
+.lh-specs .lh-specs__heading:not(.is-col-first){ margin-top: calc(1.3 * var(--lh-u)); padding-top: var(--lh-u); border-top: calc(0.1 * var(--lh-u)) solid var(--lh-line); }
+
+/* Rows - subgrid so labels and values line up down the whole column */
+.lh-specs .lh-specs__row{
+  grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; padding-bottom: calc(0.9 * var(--lh-u));
+  font: 400 calc(1.8 * var(--lh-u))/calc(3.5 * var(--lh-u)) var(--lh-font-alt); color: #1c1c1c;
+}
+.lh-specs .lh-specs__label{ min-width: 0; padding-right: calc(1.2 * var(--lh-u)); }
+.lh-specs .lh-specs__value{ font-weight: 600; }
+@supports not (grid-template-columns: subgrid) {
+  .lh-specs .lh-specs__row{ grid-template-columns: var(--lw) minmax(0, 1fr); }
+}
+
+/* Mobile - bottom half of the panel shared with box content, one column, a rule between every group */
+@media (max-width: 899px) {
+  .lh-specs .lh-specs__panel{
+    padding: calc(2.4 * var(--lh-u)) calc(1.6 * var(--lh-u)) calc(1.8 * var(--lh-u));
+    border-top: 0; border-radius: 0 0 calc(3.2 * var(--lh-u)) calc(3.2 * var(--lh-u));
+    /* bottom 64% of the shared panel gradient (top part is in lh400-box-content.css) */
+    background: linear-gradient(180deg, rgba(200, 207, 217, 0.1) 0%, rgba(244, 194, 177, 0.1) 100%);
+  }
+  .lh-specs .lh-specs__title{ font-size: calc(2.4 * var(--lh-u)); line-height: calc(2.9 * var(--lh-u)); }
+  .lh-specs .lh-specs__box{ display: block; margin-top: calc(2.3 * var(--lh-u)); padding: calc(1.4 * var(--lh-u)) calc(2 * var(--lh-u)) calc(0.5 * var(--lh-u)) calc(1.8 * var(--lh-u)); }
+  .lh-specs .lh-specs__col, .lh-specs .lh-specs__col + .lh-specs__col, .lh-specs .lh-specs__col:nth-child(n){ --lw: calc(16.5 * var(--lh-u)); border: 0; padding: 0; }
+  .lh-specs .lh-specs__heading{ font-size: calc(1.6 * var(--lh-u)); line-height: calc(3.1 * var(--lh-u)); margin-bottom: calc(0.8 * var(--lh-u)); }
+  .lh-specs .lh-specs__heading:not(.is-col-first){ margin-top: 0; padding-top: 0; border-top: 0; }
+  .lh-specs .lh-specs__heading:not(.is-first){ margin-top: calc(0.1 * var(--lh-u)); padding-top: calc(0.9 * var(--lh-u)); border-top: calc(0.1 * var(--lh-u)) solid var(--lh-line); }
+  .lh-specs .lh-specs__row{ font-size: calc(1.2 * var(--lh-u)); line-height: calc(2.3 * var(--lh-u)); padding-bottom: calc(1.9 * var(--lh-u)); }
+  .lh-specs .lh-specs__value{ line-height: calc(2.1 * var(--lh-u)); padding-top: calc(0.1 * var(--lh-u)); }
+}

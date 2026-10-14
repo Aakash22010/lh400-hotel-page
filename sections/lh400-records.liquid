@@ -1,0 +1,46 @@
+{%- comment -%}
+  LH400 - Unlocking records
+  Figma: "Past unlocking records" - blue heading over a 1342x632 photo banner with a caption on it.
+  On mobile the caption becomes the heading above a portrait image. Separate desktop / mobile images.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-records.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-records" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    {%- # Heading - on mobile the caption is shown here instead %}
+    {%- if section.settings.heading != blank -%}
+      <h2 class="lh-records__heading lh-desktop-only">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+    <h2 class="lh-records__heading-mobile lh-mobile-only">{{ section.settings.caption }}</h2>
+
+    {% # Banner - separate desktop / mobile crops, caption on the photo (desktop) %}
+    <div class="lh-records__stage">
+      <div class="lh-records__media lh-desktop-only">
+        {%- render 'lh400-image', image: section.settings.image, fallback: 'lh400-records-banner.jpg', alt: section.settings.image_alt, class: 'lh-records__img', sizes: '(min-width: 1440px) 1344px, 94vw', width: 1535, height: 723 -%}
+      </div>
+      <div class="lh-records__media lh-mobile-only">
+        {%- render 'lh400-image', image: section.settings.image_mobile, fallback: 'lh400-records-mobile.jpg', alt: section.settings.image_alt, class: 'lh-records__img', sizes: '90vw', width: 724, height: 1086 -%}
+      </div>
+      <p class="lh-records__caption lh-desktop-only">{{ section.settings.caption }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 unlocking records",
+  "tag": "div",
+  "class": "lh400-records-section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading (desktop)", "default": "Effortlessly Review <strong>Past Unlocking Records</strong> with our User-Friendly Software" },
+    { "type": "inline_richtext", "id": "caption", "label": "Caption", "info": "Shown on the banner on desktop and as the heading on mobile.", "default": "Effortlessly Review <strong>Past Unlocking Records</strong> for rooms with our User-Friendly Software" },
+    { "type": "image_picker", "id": "image", "label": "Banner image (desktop)", "info": "About 2.1:1. Leave empty for the design's reception scene." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile)", "info": "About 2:3. Leave empty for the design's portrait reception scene." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "A hotel manager asks the receptionist for the unlock records of room 207 between 12pm and 2pm" },
+    { "type": "range", "id": "padding_top", "label": "Top spacing (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 70 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top spacing (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "LH400 unlocking records" }]
+}
+{% endschema %}

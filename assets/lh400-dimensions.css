@@ -1,0 +1,46 @@
+/* ==========================================================================
+   LH400 - Lock dimensions
+   Figma: desktop 1344x661 drawing stage, mobile 402x1298 stacked drawings
+   ========================================================================== */
+
+/* Stage - the SVG keeps drawings and measurements in exact proportion as it scales */
+.lh-dimensions .lh-dimensions__stage{ position: relative; container-type: inline-size; aspect-ratio: 1344 / 661; }
+.lh-dimensions .lh-dimensions__svg{ display: block; width: 100%; height: auto; overflow: visible; }
+.lh-dimensions .lh-dimensions__svg--desktop{ position: absolute; inset: 0; height: 100%; }
+
+/* Dimension lines + dots - lines stay 1px at any size */
+.lh-dimensions .lh-dimensions__lines line{ stroke: #000; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.lh-dimensions .lh-dimensions__lines line.is-blue{ stroke: var(--lh-blue); }
+.lh-dimensions .lh-dimensions__dots circle{ fill: #000; }
+.lh-dimensions .lh-dimensions__dots circle.is-blue{ fill: var(--lh-blue); }
+/* Labels - Inter 500, font size set on the SVG group (16 desktop, 11 mobile) */
+.lh-dimensions .lh-dimensions__labels text{
+  font-family: var(--lh-font); font-weight: 500; fill: #000;
+  text-anchor: middle; dominant-baseline: central;
+}
+.lh-dimensions .lh-dimensions__labels text.is-blue{ fill: var(--lh-blue); }
+
+/* Title - blue to white gradient text, Inter 700 64/77 */
+.lh-dimensions .lh-dimensions__title{
+  font: 700 calc(6.4 * var(--lh-u))/1.21 var(--lh-font); text-transform: uppercase;
+  background: linear-gradient(180deg, var(--lh-blue) 0%, #fff 148.9%);
+  -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+}
+/* Desktop: title top-left, note bottom-left, in container units so they scale with the stage */
+.lh-dimensions .lh-dimensions__stage .lh-dimensions__title{
+  position: absolute; z-index: 1; left: -0.37%; top: 0; width: 30.43%;
+  font-size: 4.762cqw; text-align: right;
+}
+.lh-dimensions .lh-dimensions__note{
+  position: absolute; left: 0; top: 82.45%; width: 28%;
+  font: 500 1.19cqw/1.21 var(--lh-font); color: var(--lh-muted);
+}
+.lh-dimensions .lh-dimensions__note :where(strong, b){ font-weight: 700; }
+
+/* Mobile - centred title above the stacked drawings */
+@media (max-width: 899px) {
+  .lh-dimensions .lh-dimensions__mobile{ max-width: calc(40.2 * var(--lh-u)); margin-inline: auto; }
+  .lh-dimensions .lh-dimensions__mobile .lh-dimensions__title{
+    max-width: calc(28.1 * var(--lh-u)); margin: 0 auto calc(3.4 * var(--lh-u)); font-size: calc(4.4 * var(--lh-u)); line-height: calc(5.3 * var(--lh-u)); text-align: center;
+  }
+}

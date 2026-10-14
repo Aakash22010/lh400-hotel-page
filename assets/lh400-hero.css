@@ -1,0 +1,72 @@
+/* ==========================================================================
+   LH400 - Hero
+   Figma: desktop 1343x563 banner (r32), mobile 363x470
+   ========================================================================== */
+
+/* Banner */
+.lh-hero .lh-hero__media{
+  position: relative; display: flex; overflow: hidden; isolation: isolate;
+  border-radius: calc(3.2 * var(--lh-u)); aspect-ratio: 1343 / 563; background: #6b4a2b;
+}
+/* Art box: keeps the photo's ratio and covers the banner like object-fit: cover (container units),
+   so the room number and lock stay on the door at any width */
+.lh-hero .lh-hero__bg{ position: absolute; inset: 0; z-index: -1; container-type: size; overflow: hidden; }
+.lh-hero .lh-hero__art{
+  --ar: calc(1343 / 563);
+  --art-w: max(100cqw, 100cqh * var(--ar));
+  position: absolute; left: 50%; top: 50%; width: var(--art-w); aspect-ratio: 1343 / 563;
+  transform: translate(-50%, -50%);
+}
+.lh-hero .lh-hero__art picture, .lh-hero .lh-hero__img{ display: block; width: 100%; height: 100%; }
+.lh-hero .lh-hero__img{ object-fit: fill; }
+/* Room number on the door - font scales with the art width */
+.lh-hero .lh-hero__room{
+  position: absolute; left: 62.7%; top: 9.24%; width: 9.68%; text-align: center;
+  font: 400 calc(var(--art-w) * 0.02308) / 1.26 var(--lh-font-alt); letter-spacing: 0.05em; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.86); text-shadow: calc(0.2 * var(--lh-u)) calc(0.2 * var(--lh-u)) calc(0.1 * var(--lh-u)) #4a3926;
+}
+.lh-hero .lh-hero__lock{
+  position: absolute; left: 55.7%; top: 46%; width: 7.82%; height: auto;
+  filter: drop-shadow(0 calc(0.4 * var(--lh-u)) calc(0.4 * var(--lh-u)) rgba(0, 0, 0, 0.25));
+}
+/* Left fade, 612px wide in Figma */
+.lh-hero .lh-hero__shade{
+  position: absolute; left: 0; top: 0; bottom: 0; width: 45.54%; border-radius: calc(3.2 * var(--lh-u));
+  background: linear-gradient(90deg, #3e2814 0%, rgba(253, 216, 172, 0) 100%);
+}
+
+/* Copy - 64/54 inset */
+.lh-hero .lh-hero__content{ display: flex; flex-direction: column; align-items: flex-start; padding: calc(5.4 * var(--lh-u)) calc(6.4 * var(--lh-u)) calc(6 * var(--lh-u)); color: #fff; }
+.lh-hero .lh-hero__lockup{ display: flex; align-items: center; gap: calc(0.9 * var(--lh-u)); }
+.lh-hero .lh-hero__brand{ width: calc(10.2 * var(--lh-u)); height: auto; }
+.lh-hero .lh-hero__divider{ width: calc(0.3 * var(--lh-u)); height: calc(4.1 * var(--lh-u)); background: #fff; margin-top: calc(0.9 * var(--lh-u)); }
+.lh-hero .lh-hero__model{ margin-top: calc(0.7 * var(--lh-u)); font: 600 calc(2.8 * var(--lh-u))/calc(3.3 * var(--lh-u)) var(--lh-font-alt); letter-spacing: 0.03em; text-transform: uppercase; }
+.lh-hero .lh-hero__title{ margin-top: calc(7 * var(--lh-u)); max-width: calc(44 * var(--lh-u)); font: 700 calc(6.2 * var(--lh-u))/calc(7.3 * var(--lh-u)) var(--lh-font-alt); text-transform: uppercase; }
+.lh-hero .lh-hero__text{ margin-top: calc(0.8 * var(--lh-u)); max-width: calc(51.2 * var(--lh-u)); font: 400 calc(2.4 * var(--lh-u))/calc(3.3 * var(--lh-u)) var(--lh-font-alt); }
+.lh-hero .lh-hero__btn{ margin-top: calc(4.5 * var(--lh-u)); gap: 0; }
+.lh-hero .lh-hero__label{ margin-right: calc(0.4 * var(--lh-u)); }
+.lh-hero .lh-hero__compare{ margin-left: calc(0.4 * var(--lh-u)); font-size: calc(1.2 * var(--lh-u)); line-height: calc(1.9 * var(--lh-u)); opacity: 0.5; }
+@media (hover: hover) {
+  /* Hover not specified in Figma (prototype only) - placeholder until design confirms */
+  .lh-hero .lh-hero__btn:hover{ background: #fff; color: var(--lh-blue); box-shadow: 0 calc(0.8 * var(--lh-u)) calc(2 * var(--lh-u)) rgba(62, 40, 20, 0.35); transform: translateY(calc(-0.2 * var(--lh-u))); }
+}
+
+/* Mobile - portrait crop, top-down tan fade, centred copy */
+@media (max-width: 899px) {
+  .lh-hero .lh-hero__media{ aspect-ratio: 363 / 470; max-height: calc(72 * var(--lh-u)); background: #b3906a; }
+  .lh-hero .lh-hero__art{ --ar: calc(363 / 470); aspect-ratio: 363 / 470; }
+  .lh-hero .lh-hero__room{
+    left: 34.7%; top: 32.77%; width: 35.8%; font-size: calc(var(--art-w) * 0.0496); line-height: 2.17;
+    letter-spacing: 0.05em; color: rgba(255, 255, 255, 0.6); text-shadow: 0 0 calc(0.1 * var(--lh-u)) #4a3926;
+  }
+  .lh-hero .lh-hero__lock{ left: 29.2%; top: 46.17%; width: 23.4%; }
+  .lh-hero .lh-hero__shade{
+    width: 100%; border-radius: 0;
+    background: linear-gradient(180deg, rgba(166, 116, 62, 0.8) 0%, rgba(173, 137, 97, 0.56) 50%, rgba(173, 137, 97, 0) 100%);
+  }
+  .lh-hero .lh-hero__content{ width: 100%; align-items: center; padding: calc(2.4 * var(--lh-u)) var(--lh-u) 0; text-align: center; }
+  .lh-hero .lh-hero__title{ margin-top: 0; max-width: none; font-size: calc(3.1 * var(--lh-u)); line-height: calc(3.6 * var(--lh-u)); }
+  .lh-hero .lh-hero__text{ margin-top: calc(0.9 * var(--lh-u)); max-width: calc(25.9 * var(--lh-u)); font: 500 calc(1.4 * var(--lh-u))/calc(1.7 * var(--lh-u)) var(--lh-font-alt); text-transform: capitalize; }
+  .lh-hero .lh-hero__text br{ display: none; }
+  .lh-hero .lh-hero__btn{ margin-top: calc(1.1 * var(--lh-u)); }
+}

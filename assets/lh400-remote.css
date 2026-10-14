@@ -1,0 +1,27 @@
+/* ==========================================================================
+   LH400 - Remote management
+   Figma: desktop 1349x736 composite image, mobile 362 wide panel
+   ========================================================================== */
+
+.lh-remote .lh-remote__card{ position: relative; margin: 0; }
+.lh-remote .lh-remote__media{ aspect-ratio: 1349 / 736; }
+.lh-remote .lh-remote__img{ width: 100%; height: 100%; object-fit: cover; }
+/* Caption - white, right-aligned over the bottom-right of the image */
+.lh-remote .lh-remote__caption{
+  position: absolute; right: 4.67%; bottom: 12.4%; max-width: calc(39.1 * var(--lh-u));
+  font: 600 calc(3.2 * var(--lh-u))/calc(4.6 * var(--lh-u)) var(--lh-font-alt); letter-spacing: calc(-0.032 * var(--lh-u)); color: #fff; text-align: right;
+}
+
+/* Mobile - image in a pale panel (pad 13/8/15), blue caption centred below */
+@media (max-width: 899px) {
+  .lh-remote .lh-remote__card{
+    padding: calc(1.3 * var(--lh-u)) calc(0.8 * var(--lh-u)) calc(1.5 * var(--lh-u));
+    background: var(--lh-panel); border: calc(0.1 * var(--lh-u)) solid var(--lh-border); border-radius: calc(3.2 * var(--lh-u));
+  }
+  /* multiply so the image's white surround takes the panel tint */
+  .lh-remote .lh-remote__img{ mix-blend-mode: multiply; }
+  .lh-remote .lh-remote__caption{
+    position: static; max-width: none; margin-top: calc(1.4 * var(--lh-u)); padding: 0 calc(1.2 * var(--lh-u));
+    font-size: calc(1.6 * var(--lh-u)); line-height: calc(1.9 * var(--lh-u)); letter-spacing: calc(-0.016 * var(--lh-u)); color: var(--lh-blue); text-align: center; text-wrap: balance;
+  }
+}

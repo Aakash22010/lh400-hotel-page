@@ -1,0 +1,48 @@
+{%- comment -%}
+  LH400 - Privacy button
+  Figma: "Privacy button" photo banner (desktop 1344x659, mobile 366x550).
+  Photo with dark side fades, heading + text (right-aligned on desktop, centred on mobile) and an optional
+  bobbing arrow pointing at the button in the photo.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-privacy.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-privacy" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-media lh-privacy__card">
+      {%- render 'lh400-image', image: section.settings.image, fallback: 'lh400-privacy.jpg', alt: section.settings.image_alt, class: 'lh-privacy__img', sizes: '(min-width: 1440px) 1344px, (min-width: 900px) calc(100vw - 96px), calc(100vw - 36px)', width: 1798, height: 1024 -%}
+      <div class="lh-privacy__shade" aria-hidden="true"></div>
+      {%- # Arrow pointing at the privacy button in the photo %}
+      {%- if section.settings.show_arrow -%}
+        <svg class="lh-privacy__arrow" viewBox="0 0 46 46" aria-hidden="true"><path transform="translate(6.23 0.48)" d="M33.26 16.1 17.45.29a.95.95 0 0 0-1.35 0L.29 16.1a.9.9 0 0 0-.19 1.05c.1.29.48.58.86.58h8.72v26.35c0 .58.39.96.96.96h12.17c.58 0 .96-.38.96-.96V17.73h8.72c.38 0 .77-.19.86-.58.29-.38.19-.77-.1-1.05Z" fill="#fff"/></svg>
+      {%- endif -%}
+      {% # Copy -%}
+      <div class="lh-privacy__text">
+        {%- if section.settings.title != blank -%}
+          <h2 class="lh-privacy__title">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="lh-privacy__body">{{ section.settings.text | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 privacy button",
+  "tag": "div",
+  "class": "lh400-privacy-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Shown cropped to a wide banner on desktop and a tall card on mobile." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "LAVNA LH400 lock with the privacy button raised, hotel corridor behind" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Maximum Privacy with Privacy Button" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "When the guest turns up the Privacy Button, no one — not even staff — can open the door from outside" },
+    { "type": "checkbox", "id": "show_arrow", "label": "Show arrow on the privacy button", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 88 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "LH400 privacy button" }]
+}
+{% endschema %}

@@ -1,0 +1,16 @@
+/* ==========================================================================
+   LH400 - Security banner
+   Figma: 1344x834 image banner (r32), same ratio on mobile
+   ========================================================================== */
+
+.lh-security .lh-security__media{
+  position: relative; overflow: hidden; border-radius: calc(3.2 * var(--lh-u)); aspect-ratio: 1344 / 834;
+  background: #2b2530; container-type: inline-size;
+}
+.lh-security .lh-security__img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* Badge line - % position + cqw font so it stays inside the badge at any width */
+.lh-security .lh-security__badge{
+  position: absolute; left: 79.39%; top: 21.7%;
+  font: 400 1.488cqw / 1.2 var(--lh-font); color: #c4f1ce; white-space: nowrap;
+  filter: blur(calc(0.05 * var(--lh-u)));
+}

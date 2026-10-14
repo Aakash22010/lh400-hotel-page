@@ -1,0 +1,60 @@
+{%- comment -%}
+  LH400 - Payment methods
+  Figma: full-width strip above the footer (6 logos in a row; 3 per row on mobile).
+  One "Logo" block per payment method, each with its own desktop / mobile width.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-payments.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-payments" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-payments__inner">
+    <h2 class="lh-payments__title">{{ section.settings.title | escape }}</h2>
+    {% # One block per logo %}
+    <ul class="lh-payments__logos" role="list">
+      {%- for block in section.blocks -%}
+        <li class="lh-payments__logo" style="--w:{{ block.settings.width }};--wm:{{ block.settings.width_mobile }}" {{ block.shopify_attributes }}>
+          {%- render 'lh400-image', image: block.settings.image, fallback: block.settings.fallback, alt: block.settings.name, class: 'lh-payments__img', sizes: '100px', width: 400, height: 130 -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 payment methods",
+  "tag": "div",
+  "class": "lh400-payments-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Payment Methods" },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop, px)", "min": 0, "max": 200, "step": 2, "default": 0 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile, px)", "min": 0, "max": 120, "step": 2, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name (alt text)", "default": "Payment method" },
+        { "type": "image_picker", "id": "image", "label": "Logo" },
+        { "type": "text", "id": "fallback", "label": "Bundled logo (asset file)", "default": "lh400-pay-visa.png", "info": "Used when no logo is picked." },
+        { "type": "range", "id": "width", "label": "Width on desktop (px)", "min": 40, "max": 140, "step": 2, "default": 100 },
+        { "type": "range", "id": "width_mobile", "label": "Width on mobile (px)", "min": 30, "max": 100, "step": 2, "default": 64 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LH400 payment methods",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "Visa", "fallback": "lh400-pay-visa.png", "width_mobile": 64 } },
+        { "type": "logo", "settings": { "name": "Mastercard", "fallback": "lh400-pay-mastercard.png", "width_mobile": 54 } },
+        { "type": "logo", "settings": { "name": "RuPay", "fallback": "lh400-pay-rupay.png", "width_mobile": 78 } },
+        { "type": "logo", "settings": { "name": "Paytm", "fallback": "lh400-pay-paytm.png", "width_mobile": 64 } },
+        { "type": "logo", "settings": { "name": "Google Pay", "fallback": "lh400-pay-gpay.png", "width_mobile": 64 } },
+        { "type": "logo", "settings": { "name": "PhonePe", "fallback": "lh400-pay-phonepe.png", "width_mobile": 64 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

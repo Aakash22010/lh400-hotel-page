@@ -1,0 +1,74 @@
+{%- comment -%}
+  LH400 - FAQ
+  Figma: FAQ panel (desktop 1344x410) - heading on the left, accordion on the right; stacked on mobile.
+  One block per question (answer is rich text). Accordion comes from data-lh-accordion (lh400.js);
+  the first item can start open.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-faq.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-faq" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-faq__panel">
+      <h2 class="lh-faq__title">{{ section.settings.title | escape | newline_to_br }}</h2>
+
+      {% # Accordion %}
+      <div class="lh-faq__list" data-lh-accordion>
+        {%- for block in section.blocks -%}
+          {%- # First item starts open when "Open the first question" is on -%}
+          {%- assign open = false -%}
+          {%- if forloop.first and section.settings.open_first -%}{%- assign open = true -%}{%- endif -%}
+          <div class="lh-faq__item{% if open %} is-open{% endif %}" data-lh-acc-item {{ block.shopify_attributes }}>
+            <h3 class="lh-faq__q">
+              <button class="lh-faq__trigger" type="button" data-lh-acc-trigger
+                aria-expanded="{{ open }}" aria-controls="lh-faq-{{ section.id }}-{{ forloop.index }}" id="lh-faq-q-{{ section.id }}-{{ forloop.index }}">
+                <span class="lh-faq__question">{{ block.settings.question | escape }}</span>
+                <span class="lh-faq__icon" aria-hidden="true"><span></span><span></span></span>
+              </button>
+            </h3>
+            <div class="lh-faq__panel-wrap" id="lh-faq-{{ section.id }}-{{ forloop.index }}" role="region"
+              aria-labelledby="lh-faq-q-{{ section.id }}-{{ forloop.index }}" data-lh-acc-panel>
+              <div class="lh-faq__answer">{{ block.settings.answer }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 FAQ",
+  "tag": "div",
+  "class": "lh400-faq-section",
+  "settings": [
+    { "type": "textarea", "id": "title", "label": "Heading", "default": "Quick Answers For\nSmart Security" },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop, px)", "min": 0, "max": 200, "step": 2, "default": 78 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile, px)", "min": 0, "max": 120, "step": 2, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LH400 FAQ",
+      "blocks": [
+        { "type": "question", "settings": { "question": "What is included in the LAVNA LH400 Locks box?", "answer": "<p>The box contains the complete lock set, RFID cards, and manual keys. It also includes screws and a user manual for easy installation.</p>" } },
+        { "type": "question", "settings": { "question": "Is professional installation required?", "answer": "<p>The LH400 fits standard wooden doors and comes with every fitting and a user manual, so any carpenter can install it. LAVNA also offers installation and support across 25+ cities.</p>" } },
+        { "type": "question", "settings": { "question": "Does the LH400 lock keep a record of access?", "answer": "<p>Yes. Every unlock is recorded, and you can review the past unlocking records of any room in the LAVNA hotel software.</p>" } },
+        { "type": "question", "settings": { "question": "Can managers and housekeeping staff have separate access cards?", "answer": "<p>Yes. The LH400 supports separate RFID roles for the hotel manager, guests and housekeeping, each with its own access rights.</p>" } },
+        { "type": "question", "settings": { "question": "What is the LH400 Hotel Door Lock used for?", "answer": "<p>It is a smart door lock built for hotels and guest rooms: guests unlock with an RFID card or the mobile app, and staff manage every room from one software.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

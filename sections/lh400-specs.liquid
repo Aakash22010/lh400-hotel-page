@@ -1,0 +1,92 @@
+{%- comment -%}
+  LH400 - Lock specifications
+  Figma: "Lock specifications" panel (desktop 1344x451).
+  Spec table built from blocks: group headings and label/value rows, plus a "New column" block that starts the
+  next column on desktop. On mobile everything stacks in one column.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-specs.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-specs" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-panel lh-specs__panel">
+      {%- if section.settings.title != blank -%}
+        <h2 class="lh-specs__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      {% # White box - three columns split by grey rules -%}
+      <div class="lh-specs__box">
+        <div class="lh-specs__col">
+          {%- # Blocks fill the current column; a "column" block closes it and opens the next one %}
+          {%- # first_in_col / first: no divider above the first heading of a column (desktop) / of the list (mobile) %}
+          {%- assign first_in_col = true -%}
+          {%- assign first = true -%}
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'column' -%}
+                </div><div class="lh-specs__col" {{ block.shopify_attributes }}>
+                {%- assign first_in_col = true -%}
+              {%- when 'heading' -%}
+                <h3 class="lh-specs__heading{% if first_in_col %} is-col-first{% endif %}{% if first %} is-first{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.title | escape }}</h3>
+                {%- assign first_in_col = false -%}
+                {%- assign first = false -%}
+              {%- when 'row' -%}
+                <div class="lh-specs__row" {{ block.shopify_attributes }}>
+                  <span class="lh-specs__label">{{ block.settings.label | escape }}</span>
+                  <span class="lh-specs__value">{{ block.settings.value | escape | newline_to_br }}</span>
+                </div>
+                {%- assign first_in_col = false -%}
+                {%- assign first = false -%}
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 specifications",
+  "tag": "div",
+  "class": "lh400-specs-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Lock Specifications" },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 78 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 0, "info": "0 joins this panel to the Box content panel above on mobile, as in the design." }
+  ],
+  "blocks": [
+    { "type": "heading", "name": "Group heading", "settings": [ { "type": "text", "id": "title", "label": "Heading", "default": "Details" } ] },
+    {
+      "type": "row", "name": "Spec row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Recognition Speed" },
+        { "type": "textarea", "id": "value", "label": "Value", "default": "0.6 Sec", "info": "Line breaks are kept." }
+      ]
+    },
+    { "type": "column", "name": "New column", "settings": [ { "type": "paragraph", "content": "Starts a new column on desktop. On mobile all groups stack in one column." } ] }
+  ],
+  "presets": [
+    {
+      "name": "LH400 specifications",
+      "blocks": [
+        { "type": "heading", "settings": { "title": "Details" } },
+        { "type": "row", "settings": { "label": "Recognition Speed", "value": "0.6 Sec" } },
+        { "type": "row", "settings": { "label": "Operating Temperature", "value": "-10*C To -60*C" } },
+        { "type": "row", "settings": { "label": "Power Supply", "value": "4Pcs*1.5V AA Battery" } },
+        { "type": "row", "settings": { "label": "Working Current", "value": "300mAH" } },
+        { "type": "column" },
+        { "type": "heading", "settings": { "title": "Style" } },
+        { "type": "row", "settings": { "label": "Color", "value": "Black" } },
+        { "type": "heading", "settings": { "title": "Application & Requirement" } },
+        { "type": "row", "settings": { "label": "Applicable on", "value": "Wooden Doors" } },
+        { "type": "row", "settings": { "label": "Door Thickness Required", "value": "35-55mm" } },
+        { "type": "column" },
+        { "type": "heading", "settings": { "title": "Weight" } },
+        { "type": "row", "settings": { "label": "Lock Weight", "value": "1.9Kg" } },
+        { "type": "heading", "settings": { "title": "Dimensions" } },
+        { "type": "row", "settings": { "label": "Box", "value": "H - 350mm\nL - 110mm\nW - 230mm" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

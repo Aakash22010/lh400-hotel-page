@@ -1,0 +1,69 @@
+{%- comment -%}
+  LH400 - Energy saver
+  Figma: energy saver banner (desktop 1342x630, mobile 362x623).
+  Photo banner with colour fades, the lightning bolt, an app screen mockup and two rich-text captions.
+  Separate desktop / mobile images; the phone mockup can be turned off.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-energy-saver.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-energy" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-energy__stage">
+      {% # Background photo - separate desktop / mobile crops %}
+      <div class="lh-energy__bg lh-desktop-only">
+        {%- render 'lh400-image', image: section.settings.image, fallback: 'lh400-energy-banner.jpg', alt: section.settings.image_alt, class: 'lh-energy__bg-img', sizes: '(min-width: 1440px) 1344px, 94vw', width: 1277, height: 600 -%}
+      </div>
+      <div class="lh-energy__bg lh-mobile-only">
+        {%- render 'lh400-image', image: section.settings.image_mobile, fallback: 'lh400-energy-banner-mobile.jpg', alt: section.settings.image_alt, class: 'lh-energy__bg-img', sizes: '90vw', width: 724, height: 1246 -%}
+      </div>
+
+      {% # Colour fades + lightning bolt over the photo %}
+      <span class="lh-energy__fade lh-energy__fade--center" aria-hidden="true"></span>
+      <span class="lh-energy__fade lh-energy__fade--top" aria-hidden="true"></span>
+      <span class="lh-energy__fade lh-energy__fade--bottom" aria-hidden="true"></span>
+      <svg class="lh-energy__bolt" viewBox="0 0 207 630" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M207 267.75H109.71L175.95 0H62.1L0 330.75H89.01L41.4 630Z" fill="#fff"/>
+      </svg>
+
+      {%- # App screen mockup with the editable stat row on its screen %}
+      {%- if section.settings.show_phone -%}
+        <div class="lh-energy__phone">
+          <span class="lh-energy__phone-screen" aria-hidden="true"></span>
+          {%- render 'lh400-image', image: section.settings.phone_image, fallback: 'lh400-energy-phone.png', alt: section.settings.phone_alt, class: 'lh-energy__phone-img', sizes: '(max-width: 899px) 36vw, 20vw', width: 572, height: 858 -%}
+          <p class="lh-energy__phone-row">
+            <span>{{ section.settings.phone_label | escape }}</span>
+            <span>{{ section.settings.phone_value | escape }}</span>
+          </p>
+        </div>
+      {%- endif -%}
+
+      {% # Captions (rich text, bold runs as in Figma) -%}
+      <div class="lh-energy__caption lh-energy__caption--records">{{ section.settings.caption_records }}</div>
+      <div class="lh-energy__caption lh-energy__caption--rfid">{{ section.settings.caption_rfid }}</div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 energy saver",
+  "tag": "div",
+  "class": "lh400-energy-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Banner image (desktop)", "info": "About 2:1. Leave empty for the design's energy saver banner." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Banner image (mobile)", "info": "About 4:7. Leave empty for the design's stacked mobile banner." },
+    { "type": "text", "id": "image_alt", "label": "Banner alt text", "default": "LAVNA energy saver switches with an RFID card, next to a hotel room" },
+    { "type": "richtext", "id": "caption_records", "label": "Caption (software)", "default": "<p><strong>Energy Saver</strong> that records</p><p><strong>Power consumption</strong> in Software</p>" },
+    { "type": "richtext", "id": "caption_rfid", "label": "Caption (RFID)", "default": "<p><strong>Energy Saver</strong> that works</p><p>with <strong>RFID Card</strong></p>" },
+    { "type": "checkbox", "id": "show_phone", "label": "Show app screen", "default": true },
+    { "type": "image_picker", "id": "phone_image", "label": "App screen image", "info": "Transparent phone mock-up. Leave empty for the design's check-in screen." },
+    { "type": "text", "id": "phone_alt", "label": "App screen alt text", "default": "LAVNA app check-in screen showing room details" },
+    { "type": "text", "id": "phone_label", "label": "App screen row label", "default": "Energy usage" },
+    { "type": "text", "id": "phone_value", "label": "App screen row value", "default": "2kwh" },
+    { "type": "range", "id": "padding_top", "label": "Top spacing (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 70 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top spacing (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "LH400 energy saver" }]
+}
+{% endschema %}

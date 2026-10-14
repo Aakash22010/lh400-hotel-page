@@ -1,0 +1,37 @@
+{%- comment -%}
+  LH400 - Remote management
+  Figma: remote management banner (1349x736 composite: photo, laptop and the floating app screen).
+  One image + caption. The caption sits over the image on desktop and below it on mobile.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-remote.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-remote" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <figure class="lh-remote__card">
+      {% # Composite image exported from Figma - the floating screen is part of it %}
+      <div class="lh-remote__media">
+        {%- render 'lh400-image', image: section.settings.image, fallback: 'lh400-remote.jpg', alt: section.settings.image_alt, class: 'lh-remote__img', sizes: '(min-width: 1440px) 1344px, (min-width: 900px) calc(100vw - 96px), calc(100vw - 56px)', width: 1349, height: 736 -%}
+      </div>
+      {%- if section.settings.caption != blank -%}
+        <figcaption class="lh-remote__caption">{{ section.settings.caption | escape | newline_to_br }}</figcaption>
+      {%- endif -%}
+    </figure>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 remote management",
+  "tag": "div",
+  "class": "lh400-remote-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "The design's image includes the laptop and the floating screen above the rounded banner (1349x736). A replacement should keep that shape." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Hotel owner checking room records on the LAVNA software from a laptop" },
+    { "type": "textarea", "id": "caption", "label": "Caption", "default": "No matter where the Hotel Owner is, They can easily check all room details." },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 36 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "LH400 remote management" }]
+}
+{% endschema %}

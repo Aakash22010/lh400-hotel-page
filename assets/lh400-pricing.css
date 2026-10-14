@@ -1,0 +1,91 @@
+/* ==========================================================================
+   LH400 - Product pricing
+   Figma: 1344x1040 comparison panel - label column + one card per product
+   ========================================================================== */
+
+/* Heading */
+.lh-pricing .lh-pricing__heading{ font: 500 calc(3.6 * var(--lh-u))/calc(4.4 * var(--lh-u)) var(--lh-font); color: #000; margin-bottom: calc(4.8 * var(--lh-u)); }
+.lh-pricing .lh-pricing__heading-mobile{ display: none; }
+
+/* Panel + grid: 216px label column, then one column per product (--n) */
+.lh-pricing .lh-pricing__panel{
+  background: var(--lh-panel); border: calc(0.1 * var(--lh-u)) solid var(--lh-border); border-radius: calc(3.6 * var(--lh-u));
+  -webkit-backdrop-filter: blur(calc(2 * var(--lh-u))); backdrop-filter: blur(calc(2 * var(--lh-u)));
+  padding: calc(4.3 * var(--lh-u)) calc(5.6 * var(--lh-u)) calc(4.6 * var(--lh-u)) calc(3.8 * var(--lh-u));
+}
+.lh-pricing .lh-pricing__grid{
+  position: relative; display: grid;
+  grid-template-columns: calc(21.6 * var(--lh-u)) repeat(var(--n, 2), minmax(0, 1fr));
+  column-gap: calc(2.4 * var(--lh-u));
+}
+/* Card backgrounds are their own grid items behind each column, so rows stay aligned across products.
+   2nd card is the whiter one in Figma (75% vs 25%) */
+.lh-pricing .lh-pricing__card{
+  grid-row: 1 / -1; z-index: 0;
+  border: calc(0.1 * var(--lh-u)) solid var(--lh-border); border-radius: calc(4 * var(--lh-u)); background: rgba(255, 255, 255, 0.25);
+  transition: box-shadow var(--lh-dur) var(--lh-ease), border-color var(--lh-dur) var(--lh-ease), background-color var(--lh-dur) var(--lh-ease);
+}
+.lh-pricing .lh-pricing__card--2{ background: rgba(255, 255, 255, 0.75); }
+
+/* Logo */
+.lh-pricing .lh-pricing__brand{ position: relative; z-index: 1; padding-top: calc(7 * var(--lh-u)); padding-left: calc(0.1 * var(--lh-u)); }
+.lh-pricing .lh-pricing__brand-img{ width: calc(14.4 * var(--lh-u)); height: auto; opacity: 0.5; }
+
+/* Product head */
+.lh-pricing .lh-pricing__head{ position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-start; padding: calc(3.6 * var(--lh-u)) calc(2.7 * var(--lh-u)) 0; min-width: 0; }
+.lh-pricing .lh-pricing__media{ width: calc(11.3 * var(--lh-u)); height: calc(16 * var(--lh-u)); }
+.lh-pricing .lh-pricing__img{ width: 100%; height: 100%; object-fit: contain; object-position: left center; }
+.lh-pricing .lh-pricing__name{ margin-top: calc(1.6 * var(--lh-u)); font: 600 calc(2.4 * var(--lh-u))/calc(2.9 * var(--lh-u)) var(--lh-font); color: #000; }
+.lh-pricing .lh-pricing__prices{ margin-top: calc(4 * var(--lh-u)); display: flex; flex-direction: column; gap: var(--lh-u); }
+.lh-pricing .lh-pricing__price{ font: 500 calc(2.8 * var(--lh-u))/calc(3.4 * var(--lh-u)) var(--lh-font); color: #0c0c0c; }
+.lh-pricing .lh-pricing__discount{ font-weight: 300; color: #ae0000; margin-right: calc(0.6 * var(--lh-u)); }
+.lh-pricing .lh-pricing__meta{ display: flex; align-items: center; gap: calc(1.2 * var(--lh-u)); }
+.lh-pricing .lh-pricing__compare{ font: 500 calc(2 * var(--lh-u))/calc(2.4 * var(--lh-u)) var(--lh-font); color: var(--lh-muted); text-decoration: line-through; }
+.lh-pricing .lh-pricing__stars{ --lh-star: calc(1.4 * var(--lh-u)); --lh-star-gap: calc(0.5 * var(--lh-u)); }
+.lh-pricing .lh-pricing__btn{ align-self: stretch; margin-top: calc(2.4 * var(--lh-u)); }
+.lh-pricing .lh-pricing__btn-icon{ display: none; width: calc(2.2 * var(--lh-u)); height: calc(2.2 * var(--lh-u)); }
+
+/* Feature rows - 1px rules run across the whole grid, __d / __m = desktop / mobile copy */
+.lh-pricing .lh-pricing__features-title{ position: relative; z-index: 1; align-self: start; margin-top: var(--lh-u); padding-bottom: calc(1.5 * var(--lh-u)); font: 600 calc(2.4 * var(--lh-u))/calc(2.9 * var(--lh-u)) var(--lh-font); color: #000; }
+
+.lh-pricing .lh-pricing__cell{ position: relative; z-index: 1; padding: calc(1.7 * var(--lh-u)) 0 calc(2.3 * var(--lh-u)); font: 400 calc(1.6 * var(--lh-u))/calc(1.9 * var(--lh-u)) var(--lh-font); color: #000; min-width: 0; }
+.lh-pricing .lh-pricing__value{ padding-left: calc(2.7 * var(--lh-u)); padding-right: calc(2.7 * var(--lh-u)); font-weight: 600; }
+.lh-pricing .lh-pricing__cell.is-last{ padding-bottom: calc(3.6 * var(--lh-u)); }
+.lh-pricing .lh-pricing__rule{ grid-column: 1 / -1; align-self: end; z-index: 1; height: calc(0.1 * var(--lh-u)); background: var(--lh-border); margin-right: 0; }
+.lh-pricing .lh-pricing__m{ display: none; }
+
+@media (hover: hover) {
+  /* Hover not specified in Figma - placeholder until design confirms */
+  .lh-pricing .lh-pricing__grid:has(.lh-pricing__head:nth-of-type(2):hover) .lh-pricing__card--1,
+  .lh-pricing .lh-pricing__grid:has(.lh-pricing__head:nth-of-type(3):hover) .lh-pricing__card--2{ border-color: rgba(77, 119, 234, 0.6); box-shadow: 0 calc(1.2 * var(--lh-u)) calc(3.2 * var(--lh-u)) rgba(77, 119, 234, 0.12); }
+}
+
+/* Mobile - no panel or cards, tighter 3-column table, Shop Now becomes a cart icon button */
+@media (max-width: 899px) {
+  .lh-pricing .lh-pricing__heading{ font: 600 calc(2.4 * var(--lh-u))/calc(2.9 * var(--lh-u)) var(--lh-font); margin-bottom: calc(6 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__heading-desktop{ display: none; }
+  .lh-pricing .lh-pricing__heading-mobile{ display: inline; }
+  .lh-pricing .lh-pricing__panel{ background: none; border: 0; border-radius: 0; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0; }
+  .lh-pricing .lh-pricing__grid{ grid-template-columns: calc(9.6 * var(--lh-u)) repeat(var(--n, 2), minmax(0, 1fr)); column-gap: calc(1.2 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__card{ display: none; }
+  .lh-pricing .lh-pricing__brand{ align-self: start; padding: calc(10.9 * var(--lh-u)) 0 0; margin-left: calc(-0.5 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__brand-img{ width: calc(7.3 * var(--lh-u)); opacity: 0.2; }
+  .lh-pricing .lh-pricing__head{ padding: 0; }
+  .lh-pricing .lh-pricing__media{ width: calc(9.7 * var(--lh-u)); height: calc(16 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__name{ margin-top: 0; font-size: calc(1.6 * var(--lh-u)); line-height: calc(1.9 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__prices{ margin-top: calc(2.1 * var(--lh-u)); gap: calc(0.9 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__price{ font-size: calc(1.6 * var(--lh-u)); line-height: calc(1.7 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__discount{ display: block; margin-right: 0; font-size: calc(1.4 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__meta{ flex-direction: column; align-items: flex-start; gap: calc(1.2 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__compare{ font-size: calc(1.2 * var(--lh-u)); line-height: calc(1.5 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__btn{ align-self: flex-start; margin-top: calc(1.4 * var(--lh-u)); width: calc(9.4 * var(--lh-u)); height: calc(3.9 * var(--lh-u)); padding: 0; }
+  .lh-pricing .lh-pricing__btn-label{ position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+  .lh-pricing .lh-pricing__btn-icon{ display: block; }
+  .lh-pricing .lh-pricing__features-title{ margin-top: calc(1.2 * var(--lh-u)); padding-bottom: calc(0.4 * var(--lh-u)); font-size: calc(1.6 * var(--lh-u)); line-height: calc(1.9 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__cell{ padding: var(--lh-u) 0 calc(2 * var(--lh-u)); font-size: calc(1.2 * var(--lh-u)); line-height: calc(1.5 * var(--lh-u)); }
+  .lh-pricing .lh-pricing__value{ padding-left: 0; padding-right: 0; }
+  .lh-pricing .lh-pricing__cell.is-first{ padding-top: var(--lh-u); }
+  .lh-pricing .lh-pricing__cell.is-last{ padding-bottom: 0; }
+  .lh-pricing .lh-pricing__d{ display: none; }
+  .lh-pricing .lh-pricing__m{ display: inline; }
+}

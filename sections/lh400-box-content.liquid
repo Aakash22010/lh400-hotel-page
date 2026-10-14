@@ -1,0 +1,96 @@
+{%- comment -%}
+  LH400 - Box content
+  Figma: "Box content" panel (desktop 1344x258).
+  What's in the box: one block per item (label + a bundled design icon or an uploaded one).
+  On mobile this panel and the specs section below read as one panel.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-box-content.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-box" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-panel lh-box__panel">
+      {%- if section.settings.title != blank -%}
+        <h2 class="lh-box__title">{{ section.settings.title | escape }}</h2>
+      {%- endif -%}
+      <ul class="lh-box__list" role="list">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            # Figma fills the 5x2 grid in 2x2 groups (1 2 / 3 4, then 5 6 / 7 8 ...): work out column + row
+            assign i = forloop.index0
+            assign pair = i | divided_by: 4 | times: 2
+            assign odd = i | modulo: 2
+            assign col = pair | plus: odd | plus: 1
+            assign row = i | modulo: 4 | divided_by: 2 | plus: 1
+          -%}
+          <li class="lh-box__item" style="--c:{{ col }};--r:{{ row }}" {{ block.shopify_attributes }}>
+            {% # Uploaded icon, else one of the bundled design icons %}
+            <span class="lh-box__icon" aria-hidden="true">
+              {%- if block.settings.icon_image != blank -%}
+                {{ block.settings.icon_image | image_url: width: 96 | image_tag: class: 'lh-box__icon-img', alt: '', loading: 'lazy' }}
+              {%- elsif block.settings.icon != 'none' -%}
+                <img class="lh-box__icon-img" src="{{ 'lh400-box-' | append: block.settings.icon | append: '.svg' | asset_url }}" alt="" width="38" height="38">
+              {%- endif -%}
+            </span>
+            <span class="lh-box__label">{{ block.settings.label | escape }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 box content",
+  "tag": "div",
+  "class": "lh400-box-content-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Box Content" },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 74 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 100 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Front Panel" },
+        {
+          "type": "select", "id": "icon", "label": "Icon", "default": "front-panel",
+          "options": [
+            { "value": "front-panel", "label": "Front panel" },
+            { "value": "back-panel", "label": "Back panel" },
+            { "value": "manual-keys", "label": "Manual keys" },
+            { "value": "key-cylinder", "label": "Key cylinder" },
+            { "value": "mortise", "label": "Mortise" },
+            { "value": "strike-plate", "label": "Strike plate" },
+            { "value": "fitting-screws", "label": "Fitting screws" },
+            { "value": "user-manual", "label": "User manual" },
+            { "value": "rfid-cards", "label": "RFID cards" },
+            { "value": "none", "label": "None" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Custom icon", "info": "Overrides the icon above. Square, shown at 38 px." }
+      ]
+    }
+  ],
+  "max_blocks": 15,
+  "presets": [
+    {
+      "name": "LH400 box content",
+      "blocks": [
+        { "type": "item", "settings": { "label": "Front Panel", "icon": "front-panel" } },
+        { "type": "item", "settings": { "label": "Back Panel", "icon": "back-panel" } },
+        { "type": "item", "settings": { "label": "2 Manual Keys", "icon": "manual-keys" } },
+        { "type": "item", "settings": { "label": "Key Cylinder", "icon": "key-cylinder" } },
+        { "type": "item", "settings": { "label": "Mortise", "icon": "mortise" } },
+        { "type": "item", "settings": { "label": "Strike Plate", "icon": "strike-plate" } },
+        { "type": "item", "settings": { "label": "Fitting Screws", "icon": "fitting-screws" } },
+        { "type": "item", "settings": { "label": "User Manual", "icon": "user-manual" } },
+        { "type": "item", "settings": { "label": "2 RFID Cards", "icon": "rfid-cards" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

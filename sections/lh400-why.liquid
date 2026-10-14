@@ -1,0 +1,71 @@
+{%- comment -%}
+  LH400 - Why LAVNA
+  Figma: "Why LAVNA?" stacked cards.
+  One block per reason (icon + text). Desktop: the stage pins while the page scrolls and cards 2..n slide up over
+  each other (assets/lh400-why.js). Mobile: 2x2 grid. Card colours alternate between the two colour settings.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-why.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lh400-why.js' | asset_url }}" defer></script>
+
+<section class="lh lh-section lh-why"
+  style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }};--why-a:{{ section.settings.color_blue }};--why-b:{{ section.settings.color_peach }}">
+  <div class="lh-container">
+    <h2 class="lh-why__title"><span>{{ section.settings.title | escape }}</span></h2>
+  </div>
+
+  {% # Card stack - lh400-why.js pins the stage and slides the cards up on scroll %}
+  <div class="lh-why__stack" data-why-stack>
+    <div class="lh-why__stage">
+      <ol class="lh-why__cards" role="list">
+        {%- for block in section.blocks -%}
+          <li class="lh-why__card" data-why-card style="--i:{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {% # 01, 02... - hidden on the first card %}
+            <span class="lh-why__num" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</span>
+            <div class="lh-why__body">
+              {%- render 'lh400-image', image: block.settings.icon, fallback: block.settings.fallback, alt: '', class: 'lh-why__icon', sizes: '100px', width: 100, height: 70 -%}
+              <p class="lh-why__text">{{ block.settings.text | escape }}</p>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 why LAVNA",
+  "tag": "div",
+  "class": "lh400-why-section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Why LAVNA?" },
+    { "type": "color", "id": "color_blue", "label": "Card colour 1", "default": "#afd7f0" },
+    { "type": "color", "id": "color_peach", "label": "Card colour 2", "default": "#f4c2b1" },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop, px)", "min": 0, "max": 200, "step": 2, "default": 78 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile, px)", "min": 0, "max": 120, "step": 2, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "reason",
+      "name": "Reason",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Reason" },
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "fallback", "label": "Bundled icon (asset file)", "default": "lh400-icon-best.svg", "info": "Used when no icon is picked." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LH400 why LAVNA",
+      "blocks": [
+        { "type": "reason", "settings": { "text": "India’s Only Niche Brand in the Smart Lock Industry", "fallback": "lh400-icon-best.svg" } },
+        { "type": "reason", "settings": { "text": "Fastest Delivery Across India, Right to Your Doorstep.", "fallback": "lh400-icon-fast.svg" } },
+        { "type": "reason", "settings": { "text": "Installation & Support Across 25+ Cities", "fallback": "lh400-icon-tools.svg" } },
+        { "type": "reason", "settings": { "text": "Trusted by Over 1.5 Million Satisfied Customer", "fallback": "lh400-icon-like.svg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

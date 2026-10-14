@@ -1,0 +1,32 @@
+/* ==========================================================================
+   LH400 - Payment methods
+   Figma: full-width #fdf9f8 strip with a rule below, title left + 6 logos
+   ========================================================================== */
+
+/* Strip */
+.lh.lh-payments{ background: #fdf9f8; border-bottom: calc(0.1 * var(--lh-u)) solid var(--lh-border); }
+/* Top spacing goes outside the coloured strip (margin, not padding) */
+.lh.lh-payments.lh-section{ padding-top: 0; margin-top: calc(var(--pt, 0) * calc(0.1 * var(--lh-u))); }
+/* Title left, logos spread across the rest of the row */
+.lh-payments .lh-payments__inner{
+  display: flex; align-items: center; justify-content: space-between; gap: calc(4 * var(--lh-u));
+  width: min(calc(134.3 * var(--lh-u)), 100% - 2 * var(--lh-gutter)); min-height: calc(15.2 * var(--lh-u)); margin-inline: auto; padding: calc(2.6 * var(--lh-u)) 0 calc(2.6 * var(--lh-u)) calc(0.5 * var(--lh-u));
+}
+.lh-payments .lh-payments__title{ flex: none; font: 500 calc(2.8 * var(--lh-u))/calc(3.4 * var(--lh-u)) var(--lh-font); color: #000; text-transform: capitalize; }
+.lh-payments .lh-payments__logos{ display: flex; align-items: center; justify-content: space-between; gap: calc(3 * var(--lh-u)); flex: 0 1 calc(95.1 * var(--lh-u)); list-style: none; }
+/* Logo width comes from the block setting (design px) */
+.lh-payments .lh-payments__logo{ flex: none; width: calc(var(--w, 100) * calc(0.1 * var(--lh-u))); }
+.lh-payments .lh-payments__img{ width: 100%; height: auto; }
+
+/* Mobile - centred title, logos 3 per row, rule inset to the content width */
+@media (max-width: 899px) {
+  .lh.lh-payments{ border-bottom: 0; }
+  .lh.lh-payments.lh-section{ padding-top: 0; margin-top: calc(var(--ptm, var(--pt, 0)) * calc(0.1 * var(--lh-u))); }
+  .lh-payments .lh-payments__inner{
+    flex-direction: column; justify-content: flex-start; gap: calc(3.4 * var(--lh-u)); min-height: 0;
+    width: min(calc(35.8 * var(--lh-u)), 100% - 2 * var(--lh-gutter)); padding: calc(4.2 * var(--lh-u)) 0; border-bottom: calc(0.1 * var(--lh-u)) solid var(--lh-border);
+  }
+  .lh-payments .lh-payments__title{ font-size: calc(1.8 * var(--lh-u)); line-height: calc(2.2 * var(--lh-u)); text-align: center; }
+  .lh-payments .lh-payments__logos{ flex: none; flex-wrap: wrap; justify-content: center; column-gap: calc(3.4 * var(--lh-u)); row-gap: calc(1.8 * var(--lh-u)); width: calc(26.6 * var(--lh-u)); }
+  .lh-payments .lh-payments__logo{ width: calc(var(--wm, 64) * calc(0.1 * var(--lh-u))); }
+}

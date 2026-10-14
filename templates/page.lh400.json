@@ -1,0 +1,838 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "lh400",
+  "sections": {
+    "header": {
+      "type": "lh400-header",
+      "settings": {}
+    },
+    "hero": {
+      "type": "lh400-hero",
+      "settings": {
+        "product": "lh400-hotel-smart-lock"
+      }
+    },
+    "features": {
+      "type": "lh400-features",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Long life, heavy duty",
+            "title_size": 30,
+            "text_width": 295,
+            "text": "Zinc Alloy, ABS And Stainless Steel With Maximum Reliability & Stability."
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "1 Year Warranty",
+            "title_size": 30,
+            "text_width": 272,
+            "text": "1-year warranty\nso you can trust it to last, worry-free.",
+            "uppercase_first_line": true
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "User -friendly interface",
+            "title_size": 26,
+            "text_width": 310,
+            "text": "Extremely Adaptive User Interface & Super Easy Customer Experience"
+          }
+        },
+        "access_4": {
+          "type": "access",
+          "settings": {
+            "label": "RFID Card Access",
+            "text": "Quick, secure, and contactless access. Simply tap your authorized RFID card to unlock instantly.",
+            "fallback": "rfid",
+            "darken": false
+          }
+        },
+        "access_5": {
+          "type": "access",
+          "settings": {
+            "label": "Mobile App Access",
+            "text": "If your guest doesn't want to carry an RFID card, you can simply provide room access through their mobile app for more convenience",
+            "fallback": "app",
+            "darken": true
+          }
+        },
+        "access_6": {
+          "type": "access",
+          "settings": {
+            "label": "Mechanical Key",
+            "text": "Reliable physical key backup ensures access even during emergencies or technical issues.",
+            "fallback": "key",
+            "darken": true
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "access_4",
+        "access_5",
+        "access_6"
+      ]
+    },
+    "security": {
+      "type": "lh400-security",
+      "settings": {}
+    },
+    "software": {
+      "type": "lh400-software",
+      "settings": {},
+      "blocks": {
+        "feature_1": {
+          "type": "feature",
+          "settings": {
+            "title": "Alarm Trigger",
+            "text": "If a door isn’t Completely locked, an alarm will activate after 60 seconds"
+          }
+        },
+        "feature_2": {
+          "type": "feature",
+          "settings": {
+            "title": "Past Electricity Records",
+            "text": "Install our lock to enable access to detailed historical electricity usage data directly through our software."
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "title": "Past Unlocking Records",
+            "text": "Check past unlocking records of the lock and manage efficiently"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "title": "Mobile App Tracking",
+            "text": "Connect and control access from your mobile using our app"
+          }
+        }
+      },
+      "block_order": [
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ]
+    },
+    "energy": {
+      "type": "lh400-energy-saver",
+      "settings": {}
+    },
+    "records": {
+      "type": "lh400-records",
+      "settings": {}
+    },
+    "dimensions": {
+      "type": "lh400-dimensions",
+      "settings": {}
+    },
+    "rfid": {
+      "type": "lh400-rfid-roles",
+      "settings": {},
+      "blocks": {
+        "role_1": {
+          "type": "role",
+          "settings": {
+            "title": "Hotel\nManager RFID",
+            "text": "Provides managers with full access to all authorized areas, enabling easy supervision and complete control of hotel operations.",
+            "image_alt": "Manager tapping an RFID card on the LAVNA lock",
+            "fallback": "lh400-rfid-manager.jpg",
+            "focal_desktop": "50% 1%",
+            "focal_mobile": "52% 0%"
+          }
+        },
+        "role_2": {
+          "type": "role",
+          "settings": {
+            "title": "Guest\nSmart RFID",
+            "text": "Offers guests secure and convenient access to their assigned rooms and permitted amenities throughout \ntheir stay.",
+            "image_alt": "Guest tapping a smart RFID card on the LAVNA lock",
+            "fallback": "lh400-rfid-guest.jpg",
+            "focal_desktop": "50% 0%",
+            "focal_mobile": "49% 100%"
+          }
+        },
+        "role_3": {
+          "type": "role",
+          "settings": {
+            "title": "House\nKeeping RFID",
+            "text": "Allows housekeeping staff controlled entry to guest rooms and designated service areas during scheduled hours, ensuring efficient and timely maintenance.",
+            "image_alt": "Housekeeping staff tapping an RFID card on the LAVNA lock",
+            "fallback": "lh400-rfid-housekeeping.jpg",
+            "focal_desktop": "50% 0%",
+            "focal_mobile": "48% 0%"
+          }
+        }
+      },
+      "block_order": [
+        "role_1",
+        "role_2",
+        "role_3"
+      ]
+    },
+    "reviews": {
+      "type": "lh400-reviews",
+      "settings": {},
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "name": "Sachin Soni",
+            "fallback": "lh400-review-sachin.jpg",
+            "rating": 4.5,
+            "text": "Geniounly the product is awesome,with advance technology and highly secure and something different with no fear to unlocking with duplicate key."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "name": "Amit Gupta",
+            "fallback": "lh400-review-amit.jpg",
+            "rating": 4.5,
+            "text": "It's working as expected since 2 months no issues till now Cons:it's difficult to detect your finger print if it's sweat or water in your hand."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "name": "Rahul Mehra",
+            "fallback": "lh400-review-rahul.jpg",
+            "rating": 4.5,
+            "text": "I have purchased it on September month, stopped working after three month and returned product. After returning the product, they suggested another product with key facility."
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "name": "Tanya Garg",
+            "fallback": "lh400-review-tanya.jpg",
+            "rating": 4.5,
+            "text": "Works seamlessly build quality is sturdy enough for main doors. First the device needs to be configured in the app only then we can add secured fingerprint."
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "name": "Paras Bhatia",
+            "fallback": "lh400-review-paras.jpg",
+            "rating": 4.5,
+            "text": "Got this product yesterday only, initially I was being confused that it is being unlocked with any finger. Then I connected with Lavna customer care."
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "name": "Priya Arora",
+            "fallback": "lh400-review-priya.jpg",
+            "rating": 4.5,
+            "text": "Works seamlessly, and the build quality is sturdy enough for main doors. The device needs to be configured in the app first, after which secure fingerprints can be added."
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "name": "Umang Raj",
+            "fallback": "lh400-review-umang.jpg",
+            "rating": 4.5,
+            "text": "Amazing smart padlock! The build quality is strong, the fingerprint/Bluetooth unlock works smoothly, and setup was very easy."
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7"
+      ]
+    },
+    "pricing": {
+      "type": "lh400-pricing",
+      "settings": {},
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "name": "LH400",
+            "fallback": "lh400-pricing-lh400.png",
+            "discount": "-53%",
+            "price": "Rs. 3,990.00",
+            "compare_price": "Rs. 8,500.00",
+            "rating": 4.5,
+            "button_label": "Shop Now",
+            "product": "lh400-hotel-smart-lock"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "name": "LH500",
+            "fallback": "lh400-pricing-lh500.png",
+            "discount": "-60%",
+            "price": "Rs. 5,190.00",
+            "compare_price": "Rs. 12,990.00",
+            "rating": 4.5,
+            "button_label": "Shop Now",
+            "product": "lh500-hotel-smart-lock"
+          }
+        },
+        "feature_3": {
+          "type": "feature",
+          "settings": {
+            "label": "Color",
+            "value_1": "Black",
+            "value_2": "Matte Silver"
+          }
+        },
+        "feature_4": {
+          "type": "feature",
+          "settings": {
+            "label": "Manual Key",
+            "label_mobile": "Manual \nKey",
+            "value_1": "Yes, 2 Mechanical Keys",
+            "value_1_mobile": "Yes, 2 Manual Keys",
+            "value_2": "Yes, 2 Mechanical Keys",
+            "value_2_mobile": "Yes, 2 Manual Keys"
+          }
+        },
+        "feature_5": {
+          "type": "feature",
+          "settings": {
+            "label": "RFID Card",
+            "label_mobile": "RFID \nCard",
+            "value_1": "Yes, 2 Cards",
+            "value_2": "Yes, 2 Cards"
+          }
+        },
+        "feature_6": {
+          "type": "feature",
+          "settings": {
+            "label": "Battery Type",
+            "label_mobile": "Battery \nType",
+            "value_1": "4 Pcs * AA Alkaline (Duracell Recommended)",
+            "value_2": "4 Pcs * AA Alkaline (Duracell Recommended)"
+          }
+        },
+        "feature_7": {
+          "type": "feature",
+          "settings": {
+            "label": "Door Thickness",
+            "label_mobile": "Door \nThickness",
+            "value_1": "30 - 65mm",
+            "value_2": "35 - 55mm"
+          }
+        },
+        "feature_8": {
+          "type": "feature",
+          "settings": {
+            "label": "Security Alert",
+            "label_mobile": "Alert",
+            "value_1": "Room not Locked feature (Not Available)",
+            "value_1_mobile": "Room not Locked (Not Available)",
+            "value_2": "Room not Locked feature (Available)",
+            "value_2_mobile": "Room not Locked (Available)"
+          }
+        },
+        "feature_9": {
+          "type": "feature",
+          "settings": {
+            "label": "Warranty",
+            "value_1": "1 Year",
+            "value_2": "3 Year"
+          }
+        },
+        "feature_10": {
+          "type": "feature",
+          "settings": {
+            "label": "Material used",
+            "value_1": "Zinc alloy, ABS and Stainless steel",
+            "value_2": "Complete Stainless steel"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "feature_3",
+        "feature_4",
+        "feature_5",
+        "feature_6",
+        "feature_7",
+        "feature_8",
+        "feature_9",
+        "feature_10"
+      ]
+    },
+    "box": {
+      "type": "lh400-box-content",
+      "settings": {},
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "label": "Front Panel",
+            "icon": "front-panel"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "label": "Back Panel",
+            "icon": "back-panel"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "label": "2 Manual Keys",
+            "icon": "manual-keys"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "label": "Key Cylinder",
+            "icon": "key-cylinder"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "label": "Mortise",
+            "icon": "mortise"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "label": "Strike Plate",
+            "icon": "strike-plate"
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "label": "Fitting Screws",
+            "icon": "fitting-screws"
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "label": "User Manual",
+            "icon": "user-manual"
+          }
+        },
+        "item_9": {
+          "type": "item",
+          "settings": {
+            "label": "2 RFID Cards",
+            "icon": "rfid-cards"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8",
+        "item_9"
+      ]
+    },
+    "specs": {
+      "type": "lh400-specs",
+      "settings": {},
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "title": "Details"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Recognition Speed",
+            "value": "0.6 Sec"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Operating Temperature",
+            "value": "-10*C To -60*C"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Power Supply",
+            "value": "4Pcs*1.5V AA Battery"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Working Current",
+            "value": "300mAH"
+          }
+        },
+        "column_6": {
+          "type": "column",
+          "settings": {}
+        },
+        "heading_7": {
+          "type": "heading",
+          "settings": {
+            "title": "Style"
+          }
+        },
+        "row_8": {
+          "type": "row",
+          "settings": {
+            "label": "Color",
+            "value": "Black"
+          }
+        },
+        "heading_9": {
+          "type": "heading",
+          "settings": {
+            "title": "Application & Requirement"
+          }
+        },
+        "row_10": {
+          "type": "row",
+          "settings": {
+            "label": "Applicable on",
+            "value": "Wooden Doors"
+          }
+        },
+        "row_11": {
+          "type": "row",
+          "settings": {
+            "label": "Door Thickness Required",
+            "value": "35-55mm"
+          }
+        },
+        "column_12": {
+          "type": "column",
+          "settings": {}
+        },
+        "heading_13": {
+          "type": "heading",
+          "settings": {
+            "title": "Weight"
+          }
+        },
+        "row_14": {
+          "type": "row",
+          "settings": {
+            "label": "Lock Weight",
+            "value": "1.9Kg"
+          }
+        },
+        "heading_15": {
+          "type": "heading",
+          "settings": {
+            "title": "Dimensions"
+          }
+        },
+        "row_16": {
+          "type": "row",
+          "settings": {
+            "label": "Box",
+            "value": "H - 350mm\nL - 110mm\nW - 230mm"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "column_6",
+        "heading_7",
+        "row_8",
+        "heading_9",
+        "row_10",
+        "row_11",
+        "column_12",
+        "heading_13",
+        "row_14",
+        "heading_15",
+        "row_16"
+      ]
+    },
+    "remote": {
+      "type": "lh400-remote",
+      "settings": {}
+    },
+    "privacy": {
+      "type": "lh400-privacy",
+      "settings": {}
+    },
+    "alarm": {
+      "type": "lh400-alarm",
+      "settings": {}
+    },
+    "faq": {
+      "type": "lh400-faq",
+      "settings": {},
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What is included in the LAVNA LH400 Locks box?",
+            "answer": "<p>The box contains the complete lock set, RFID cards, and manual keys. It also includes screws and a user manual for easy installation.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Is professional installation required?",
+            "answer": "<p>The LH400 fits standard wooden doors and comes with every fitting and a user manual, so any carpenter can install it. LAVNA also offers installation and support across 25+ cities.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Does the LH400 lock keep a record of access?",
+            "answer": "<p>Yes. Every unlock is recorded, and you can review the past unlocking records of any room in the LAVNA hotel software.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Can managers and housekeeping staff have separate access cards?",
+            "answer": "<p>Yes. The LH400 supports separate RFID roles for the hotel manager, guests and housekeeping, each with its own access rights.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "What is the LH400 Hotel Door Lock used for?",
+            "answer": "<p>It is a smart door lock built for hotels and guest rooms: guests unlock with an RFID card or the mobile app, and staff manage every room from one software.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5"
+      ]
+    },
+    "products": {
+      "type": "lh400-products",
+      "settings": {},
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Digital Padlock LP45",
+            "fallback": "lh400-product-padlock.png"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Digital Cabinet Lock LS10 Black",
+            "fallback": "lh400-product-ls10.png"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Smart Safe Locker 58L",
+            "fallback": "lh400-product-safe.png"
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Digital Smart Gateway",
+            "fallback": "lh400-product-gateway.png"
+          }
+        },
+        "product_5": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Smart Lift Controller",
+            "fallback": "lh400-product-lift.png"
+          }
+        },
+        "product_6": {
+          "type": "product",
+          "settings": {
+            "title": "LAVNA Digital Cabinet Lock LS11 Black",
+            "fallback": "lh400-product-ls11.png"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4",
+        "product_5",
+        "product_6"
+      ]
+    },
+    "why": {
+      "type": "lh400-why",
+      "settings": {},
+      "blocks": {
+        "reason_1": {
+          "type": "reason",
+          "settings": {
+            "text": "India’s Only Niche Brand in the Smart Lock Industry",
+            "fallback": "lh400-icon-best.svg"
+          }
+        },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "text": "Fastest Delivery Across India, Right to Your Doorstep.",
+            "fallback": "lh400-icon-fast.svg"
+          }
+        },
+        "reason_3": {
+          "type": "reason",
+          "settings": {
+            "text": "Installation & Support Across 25+ Cities",
+            "fallback": "lh400-icon-tools.svg"
+          }
+        },
+        "reason_4": {
+          "type": "reason",
+          "settings": {
+            "text": "Trusted by Over 1.5 Million Satisfied Customer",
+            "fallback": "lh400-icon-like.svg"
+          }
+        }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_2",
+        "reason_3",
+        "reason_4"
+      ]
+    },
+    "payments": {
+      "type": "lh400-payments",
+      "settings": {},
+      "blocks": {
+        "logo_1": {
+          "type": "logo",
+          "settings": {
+            "name": "Visa",
+            "fallback": "lh400-pay-visa.png",
+            "width_mobile": 64
+          }
+        },
+        "logo_2": {
+          "type": "logo",
+          "settings": {
+            "name": "Mastercard",
+            "fallback": "lh400-pay-mastercard.png",
+            "width_mobile": 54
+          }
+        },
+        "logo_3": {
+          "type": "logo",
+          "settings": {
+            "name": "RuPay",
+            "fallback": "lh400-pay-rupay.png",
+            "width_mobile": 78
+          }
+        },
+        "logo_4": {
+          "type": "logo",
+          "settings": {
+            "name": "Paytm",
+            "fallback": "lh400-pay-paytm.png",
+            "width_mobile": 64
+          }
+        },
+        "logo_5": {
+          "type": "logo",
+          "settings": {
+            "name": "Google Pay",
+            "fallback": "lh400-pay-gpay.png",
+            "width_mobile": 64
+          }
+        },
+        "logo_6": {
+          "type": "logo",
+          "settings": {
+            "name": "PhonePe",
+            "fallback": "lh400-pay-phonepe.png",
+            "width_mobile": 64
+          }
+        }
+      },
+      "block_order": [
+        "logo_1",
+        "logo_2",
+        "logo_3",
+        "logo_4",
+        "logo_5",
+        "logo_6"
+      ]
+    },
+    "footer": {
+      "type": "lh400-footer",
+      "settings": {}
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "features",
+    "security",
+    "software",
+    "energy",
+    "records",
+    "dimensions",
+    "rfid",
+    "reviews",
+    "pricing",
+    "box",
+    "specs",
+    "remote",
+    "privacy",
+    "alarm",
+    "faq",
+    "products",
+    "why",
+    "payments",
+    "footer"
+  ]
+}

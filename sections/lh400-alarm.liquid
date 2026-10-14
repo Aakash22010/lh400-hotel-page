@@ -1,0 +1,46 @@
+{%- comment -%}
+  LH400 - Alarm card
+  Figma: mobile-only card (366x585), white heading + text.
+  In the mobile Figma frame the card has no image behind its white text, so the section is off by default.
+  Turn it on and pick an image to use it; without an image the card falls back to a dark gradient.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{%- if section.settings.enabled -%}
+  {{ 'lh400-alarm.css' | asset_url | stylesheet_tag }}
+  <section class="lh lh-section lh-alarm lh-mobile-only" style="--pt:{{ section.settings.padding_top_mobile }};--ptm:{{ section.settings.padding_top_mobile }}">
+    <div class="lh-container">
+      <div class="lh-media lh-alarm__card">
+        {%- if section.settings.image != blank -%}
+          {%- render 'lh400-image', image: section.settings.image, alt: section.settings.image_alt, class: 'lh-alarm__img', sizes: 'calc(100vw - 36px)' -%}
+        {%- endif -%}
+        <div class="lh-alarm__shade" aria-hidden="true"></div>
+        {% # Heading at the top, text at the bottom %}
+        <div class="lh-alarm__text">
+          {%- if section.settings.title != blank -%}
+            <h2 class="lh-alarm__title">{{ section.settings.title | escape | newline_to_br }}</h2>
+          {%- endif -%}
+          {%- if section.settings.text != blank -%}
+            <p class="lh-alarm__body">{{ section.settings.text | escape }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "LH400 alarm (mobile)",
+  "tag": "div",
+  "class": "lh400-alarm-section",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Show this card", "default": false, "info": "Mobile only. Hidden by default: in the design this card's text has no image behind it and is not visible." },
+    { "type": "image_picker", "id": "image", "label": "Image", "info": "Tall image, about 366 x 585." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "LH400 lock door-ajar alarm" },
+    { "type": "textarea", "id": "title", "label": "Heading", "default": "Alarm if not\nlocked properly" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "If a door isn’t Completely locked, an alarm will activate after 60 seconds—adding an extra layer of safety and reliability" },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile)", "min": 0, "max": 200, "step": 2, "unit": "px", "default": 48 }
+  ],
+  "presets": [{ "name": "LH400 alarm (mobile)" }]
+}
+{% endschema %}

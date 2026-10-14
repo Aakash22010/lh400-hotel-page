@@ -1,0 +1,82 @@
+{%- comment -%}
+  LH400 - Reviews
+  Figma: customer review cards (365x243) with prev / next arrows, running off the right edge.
+  One block per review: avatar, name, star rating (halves allowed) and text.
+  Arrows and drag / swipe come from data-lh-slider (lh400.js); arrows are hidden on mobile.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-reviews.css' | asset_url | stylesheet_tag }}
+
+<section class="lh lh-section lh-reviews" style="--pt:{{ section.settings.padding_top }};--ptm:{{ section.settings.padding_top_mobile }}">
+  <div class="lh-reviews__slider" data-lh-slider>
+    {% # Heading + arrows %}
+    <div class="lh-container lh-reviews__head">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="lh-reviews__heading">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      <div class="lh-reviews__nav">
+        <button class="lh-arrow lh-reviews__arrow" type="button" data-lh-prev aria-label="Previous reviews">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M17.5 10H3m6.2-6.4L2.8 10l6.4 6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="lh-arrow lh-reviews__arrow" type="button" data-lh-next aria-label="Next reviews">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 10H17m-6.2-6.4 6.4 6.4-6.4 6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    {% # Cards %}
+    <ul class="lh-reviews__track lh-scroller" data-lh-track role="list">
+      {%- for block in section.blocks -%}
+        <li class="lh-reviews__card" {{ block.shopify_attributes }}>
+          <div class="lh-reviews__person">
+            <span class="lh-reviews__avatar">
+              {%- render 'lh400-image', image: block.settings.avatar, fallback: block.settings.fallback, alt: block.settings.name, class: 'lh-reviews__avatar-img', sizes: '49px', width: 120, height: 120 -%}
+            </span>
+            <p class="lh-reviews__name">{{ block.settings.name | escape }}</p>
+          </div>
+          {%- render 'lh400-stars', rating: block.settings.rating, class: 'lh-reviews__stars' -%}
+          <p class="lh-reviews__text">{{ block.settings.text | escape }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 reviews",
+  "class": "lh400-reviews-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Why People Rely On Us" },
+    { "type": "range", "id": "padding_top", "label": "Space above (desktop, px)", "min": 0, "max": 200, "step": 2, "default": 78 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Space above (mobile, px)", "min": 0, "max": 120, "step": 2, "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Customer name" },
+        { "type": "image_picker", "id": "avatar", "label": "Photo" },
+        { "type": "text", "id": "fallback", "label": "Bundled photo (used when no photo is picked)", "default": "lh400-review-sachin.jpg" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 0, "max": 5, "step": 0.5, "default": 4.5 },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Share what this customer said about the lock." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LH400 reviews",
+      "blocks": [
+        { "type": "review", "settings": { "name": "Sachin Soni", "fallback": "lh400-review-sachin.jpg", "rating": 4.5, "text": "Geniounly the product is awesome,with advance technology and highly secure and something different with no fear to unlocking with duplicate key." } },
+        { "type": "review", "settings": { "name": "Amit Gupta", "fallback": "lh400-review-amit.jpg", "rating": 4.5, "text": "It's working as expected since 2 months no issues till now Cons:it's difficult to detect your finger print if it's sweat or water in your hand." } },
+        { "type": "review", "settings": { "name": "Rahul Mehra", "fallback": "lh400-review-rahul.jpg", "rating": 4.5, "text": "I have purchased it on September month, stopped working after three month and returned product. After returning the product, they suggested another product with key facility." } },
+        { "type": "review", "settings": { "name": "Tanya Garg", "fallback": "lh400-review-tanya.jpg", "rating": 4.5, "text": "Works seamlessly build quality is sturdy enough for main doors. First the device needs to be configured in the app only then we can add secured fingerprint." } },
+        { "type": "review", "settings": { "name": "Paras Bhatia", "fallback": "lh400-review-paras.jpg", "rating": 4.5, "text": "Got this product yesterday only, initially I was being confused that it is being unlocked with any finger. Then I connected with Lavna customer care." } },
+        { "type": "review", "settings": { "name": "Priya Arora", "fallback": "lh400-review-priya.jpg", "rating": 4.5, "text": "Works seamlessly, and the build quality is sturdy enough for main doors. The device needs to be configured in the app first, after which secure fingerprints can be added." } },
+        { "type": "review", "settings": { "name": "Umang Raj", "fallback": "lh400-review-umang.jpg", "rating": 4.5, "text": "Amazing smart padlock! The build quality is strong, the fingerprint/Bluetooth unlock works smoothly, and setup was very easy." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

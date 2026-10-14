@@ -1,0 +1,50 @@
+/* ==========================================================================
+   LH400 - Energy saver
+   Figma: desktop 1342x630 banner (r32), mobile 362x623
+   ========================================================================== */
+
+/* Banner - everything inside is placed in % and type uses container units, so it scales as one piece */
+.lh-energy .lh-energy__stage{
+  position: relative; overflow: hidden; isolation: isolate; container-type: inline-size;
+  aspect-ratio: 1342 / 630; border-radius: calc(3.2 * var(--lh-u));
+}
+.lh-energy .lh-energy__bg, .lh-energy .lh-energy__bg-img{ position: absolute; inset: 0; width: 100%; height: 100%; }
+.lh-energy .lh-energy__bg-img{ object-fit: cover; }
+
+/* Beige fade across the middle + white lightning bolt */
+.lh-energy .lh-energy__fade{ position: absolute; pointer-events: none; }
+.lh-energy .lh-energy__fade--center{ left: 31%; width: 40.61%; top: 0; height: 100%; background: linear-gradient(270deg, #beab9d 0%, rgba(190, 171, 157, 0) 50%, #beab9d 100%); }
+.lh-energy .lh-energy__fade--top, .lh-energy .lh-energy__fade--bottom{ display: none; }
+.lh-energy .lh-energy__bolt{ position: absolute; left: 45.31%; top: 0; width: 15.42%; height: 100%; }
+
+/* App screen mockup - white screen behind the phone PNG, stat row on top */
+.lh-energy .lh-energy__phone{ position: absolute; left: 25.04%; top: 13.49%; width: 21.31%; aspect-ratio: 286 / 429; container-type: inline-size; }
+.lh-energy .lh-energy__phone-screen{ position: absolute; left: 16.08%; top: 1.17%; width: 67.48%; height: 91.61%; background: #fff; border-radius: 14% / 6.9%; }
+.lh-energy .lh-energy__phone-img{ position: relative; width: 100%; height: 100%; object-fit: contain; }
+.lh-energy .lh-energy__phone-row{
+  position: absolute; left: 20.28%; top: 63.17%; width: 59.09%; height: 6.06%;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 4.5% 0 2.8%;
+  background: #eff1f2; border-radius: 1.4cqw;
+  font: 400 2.8cqw/1 var(--lh-font-alt); color: #000;
+}
+
+/* Captions - Roboto 32/36, bottom-left and top-right */
+.lh-energy .lh-energy__caption{ position: absolute; font: 400 2.385cqw/1.125 var(--lh-font-alt); color: #000; }
+.lh-energy .lh-energy__caption :where(p){ margin: 0; }
+.lh-energy .lh-energy__caption :where(strong, b){ font-weight: 600; }
+.lh-energy .lh-energy__caption--records{ left: 4.62%; bottom: 4.6%; }
+.lh-energy .lh-energy__caption--rfid{ right: 4.92%; top: 3.65%; text-align: right; }
+
+/* Mobile - tall banner, warm fades on the right instead of the bolt, captions top and bottom left */
+@media (max-width: 899px) {
+  .lh-energy .lh-energy__stage{ aspect-ratio: 362 / 623; max-width: calc(40.2 * var(--lh-u)); margin-inline: auto; }
+  .lh-energy .lh-energy__fade--center, .lh-energy .lh-energy__bolt{ display: none; }
+  .lh-energy .lh-energy__fade--top, .lh-energy .lh-energy__fade--bottom{ display: block; }
+  .lh-energy .lh-energy__fade--top{ left: 55.52%; top: 0; width: 44.48%; height: 48.15%; background: linear-gradient(270deg, #e0b592 0%, rgba(190, 171, 157, 0) 100%); }
+  .lh-energy .lh-energy__fade--bottom{ left: 71.82%; top: 48.96%; width: 28.18%; height: 51.04%; background: linear-gradient(270deg, #d1a889 0%, rgba(190, 171, 157, 0) 100%); }
+  .lh-energy .lh-energy__phone{ left: 61.05%; top: 12.36%; width: 38.95%; }
+  .lh-energy .lh-energy__phone-row{ font-size: 3.55cqw; }
+  .lh-energy .lh-energy__caption{ font-size: 5.525cqw; line-height: 1.1; }
+  .lh-energy .lh-energy__caption--records{ left: 8.84%; top: 1.77%; bottom: auto; }
+  .lh-energy .lh-energy__caption--rfid{ left: 8.84%; right: auto; top: auto; bottom: 2.9%; text-align: left; }
+}

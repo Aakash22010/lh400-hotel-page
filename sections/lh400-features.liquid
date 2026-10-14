@@ -1,0 +1,279 @@
+{%- comment -%}
+  LH400 - Features
+  Figma: benefit cards, "3 WAY ACCESS" artwork and the access photo cards, in the pale panel (desktop 1344 wide).
+  Blocks: "Feature card" (benefit card) and "Access card" (photo with a frosted pill that expands with a description).
+  The pill opens on hover / tap (lh400-features.js); on mobile both rows are swipe carousels.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-features.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lh400-features.js' | asset_url }}" defer></script>
+
+{%- assign s = section.settings -%}
+<section class="lh lh-section lh-features" style="--pt:{{ s.padding_top }};--ptm:{{ s.padding_top_mobile }}" data-lh-features>
+  <div class="lh-container lh-features__wrap">
+    <div class="lh-features__panel">
+      {% # Benefit cards - staggered on desktop, carousel on mobile %}
+      <div class="lh-features__cards" data-lh-slider data-lh-center>
+        <div class="lh-features__cards-track lh-scroller" data-lh-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <div class="lh-features__card{% if block.settings.uppercase_first_line %} is-first-upper{% endif %}" style="--title-size:{{ block.settings.title_size }};--text-w:{{ block.settings.text_width }}" {{ block.shopify_attributes }}>
+                <h3 class="lh-features__card-title">{{ block.settings.title | escape }}</h3>
+                <p class="lh-features__card-text"><span class="lh-features__card-copy">{{ block.settings.text | escape | newline_to_br }}</span></p>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {% # "3 WAY ACCESS" artwork %}
+      <h2 class="lh-features__logo">
+        {%- render 'lh400-image', image: s.logo_image, fallback: 'lh400-3way-access.svg', alt: s.heading, class: 'lh-features__logo-img', width: 264, height: 100 -%}
+      </h2>
+
+      {% # Access photo cards %}
+      <div class="lh-features__access" data-lh-slider data-lh-center>
+        <div class="lh-features__access-track lh-scroller" data-lh-track>
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'access' -%}
+              {%- liquid
+                # bundled photo per card (RFID / app / key) when no image is picked
+                assign fallback = 'lh400-access-rfid.jpg'
+                case block.settings.fallback
+                  when 'app'
+                    assign fallback = 'lh400-access-app.jpg'
+                  when 'key'
+                    assign fallback = 'lh400-access-key.jpg'
+                endcase
+                # link card when a URL is set, otherwise a button that toggles the pill
+                assign tag = 'div'
+                if block.settings.link != blank
+                  assign tag = 'a'
+                endif
+              -%}
+              <{{ tag }} class="lh-features__access-card{% if block.settings.darken %} is-dark{% endif %}"{% if tag == 'a' %} href="{{ block.settings.link }}"{% else %} tabindex="0" role="button" aria-expanded="false"{% endif %} data-lh-access {{ block.shopify_attributes }}>
+                {%- render 'lh400-image', image: block.settings.image, fallback: fallback, alt: block.settings.label, class: 'lh-features__access-img', sizes: '(min-width: 900px) 412px, 290px', width: 706, height: 964 -%}
+                {% # Frosted pill: label + arrow, description revealed when open -%}
+                <span class="lh-features__pill">
+                  <span class="lh-features__pill-label">{{ block.settings.label | escape }}</span>
+                  <span class="lh-features__pill-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 26 14"><path d="M1 7h23M18 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  {%- if block.settings.text != blank -%}
+                    <span class="lh-features__pill-desc"><span class="lh-features__pill-text">{{ block.settings.text | escape }}</span></span>
+                  {%- endif -%}
+                </span>
+              </{{ tag }}>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 features",
+  "tag": "div",
+  "class": "lh400-features-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (read by screen readers, shown as the logo)",
+      "default": "3 Way Access"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Heading artwork",
+      "info": "Leave empty for the 3 WAY ACCESS artwork from the design."
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top spacing (desktop)",
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px",
+      "default": 68
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Top spacing (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "1 Year Warranty"
+        },
+        {
+          "type": "range",
+          "id": "title_size",
+          "label": "Title size (desktop)",
+          "min": 20,
+          "max": 36,
+          "step": 1,
+          "unit": "px",
+          "default": 30
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "1-year warranty\nso you can trust it to last, worry-free."
+        },
+        {
+          "type": "number",
+          "id": "text_width",
+          "label": "Text width in px (desktop)",
+          "info": "Where the description wraps; the design uses 272-310.",
+          "default": 295
+        },
+        {
+          "type": "checkbox",
+          "id": "uppercase_first_line",
+          "label": "Uppercase first line of text",
+          "default": false
+        }
+      ]
+    },
+    {
+      "type": "access",
+      "name": "Access card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "RFID Card Access"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "info": "Revealed when the card is hovered or tapped.",
+          "default": "Quick, secure, and contactless access. Simply tap your authorized RFID card to unlock instantly."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "fallback",
+          "label": "Design image (used when no image is picked)",
+          "default": "rfid",
+          "options": [
+            {
+              "value": "rfid",
+              "label": "RFID card"
+            },
+            {
+              "value": "app",
+              "label": "Mobile app"
+            },
+            {
+              "value": "key",
+              "label": "Mechanical key"
+            }
+          ]
+        },
+        {
+          "type": "checkbox",
+          "id": "darken",
+          "label": "Darken bottom of image",
+          "default": false
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "LH400 features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Long life, heavy duty",
+            "title_size": 30,
+            "text_width": 295,
+            "text": "Zinc Alloy, ABS And Stainless Steel With Maximum Reliability & Stability."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "1 Year Warranty",
+            "title_size": 30,
+            "text_width": 272,
+            "text": "1-year warranty\nso you can trust it to last, worry-free.",
+            "uppercase_first_line": true
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "User -friendly interface",
+            "title_size": 26,
+            "text_width": 310,
+            "text": "Extremely Adaptive User Interface & Super Easy Customer Experience"
+          }
+        },
+        {
+          "type": "access",
+          "settings": {
+            "label": "RFID Card Access",
+            "text": "Quick, secure, and contactless access. Simply tap your authorized RFID card to unlock instantly.",
+            "fallback": "rfid",
+            "darken": false
+          }
+        },
+        {
+          "type": "access",
+          "settings": {
+            "label": "Mobile App Access",
+            "text": "If your guest doesn't want to carry an RFID card, you can simply provide room access through their mobile app for more convenience",
+            "fallback": "app",
+            "darken": true
+          }
+        },
+        {
+          "type": "access",
+          "settings": {
+            "label": "Mechanical Key",
+            "text": "Reliable physical key backup ensures access even during emergencies or technical issues.",
+            "fallback": "key",
+            "darken": true
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

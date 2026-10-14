@@ -1,0 +1,62 @@
+/* ==========================================================================
+   LH400 - FAQ
+   Figma: 1344x410 panel - heading left, 727px accordion right
+   ========================================================================== */
+
+/* Panel - heading column + accordion column */
+.lh-faq .lh-faq__panel{
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, calc(72.7 * var(--lh-u))); column-gap: calc(4 * var(--lh-u)); align-items: start;
+  padding: calc(4.8 * var(--lh-u)) calc(3.8 * var(--lh-u)) calc(2.6 * var(--lh-u)) calc(5.3 * var(--lh-u));
+  background: var(--lh-panel);
+  border: calc(0.1 * var(--lh-u)) solid var(--lh-border);
+  border-radius: calc(3.6 * var(--lh-u));
+  -webkit-backdrop-filter: blur(calc(2 * var(--lh-u)));
+  backdrop-filter: blur(calc(2 * var(--lh-u)));
+}
+.lh-faq .lh-faq__title{ font: 600 calc(3.6 * var(--lh-u))/calc(4.4 * var(--lh-u)) var(--lh-font); color: #000; text-transform: capitalize; max-width: calc(44.3 * var(--lh-u)); }
+
+/* Items - #c9c9c9 rule under each, 20 apart */
+.lh-faq .lh-faq__list{ padding-top: calc(0.1 * var(--lh-u)); }
+.lh-faq .lh-faq__item{ border-bottom: calc(0.1 * var(--lh-u)) solid var(--lh-border); }
+.lh-faq .lh-faq__item + .lh-faq__item{ padding-top: calc(2 * var(--lh-u)); }
+.lh-faq .lh-faq__q{ font: inherit; }
+.lh-faq .lh-faq__trigger{
+  display: flex; align-items: center; justify-content: space-between; gap: calc(2.4 * var(--lh-u));
+  width: 100%; min-height: calc(2.1 * var(--lh-u)); padding: 0 calc(0.6 * var(--lh-u)) calc(2 * var(--lh-u)) 0; text-align: left;
+}
+.lh-faq .lh-faq__question{ font: 600 calc(1.6 * var(--lh-u))/calc(1.9 * var(--lh-u)) var(--lh-font); color: #000; transition: color var(--lh-dur) var(--lh-ease); }
+
+/* +/- icon: the vertical bar collapses and the other one thickens to the 30x4 minus from Figma */
+.lh-faq .lh-faq__icon{ position: relative; flex: none; width: calc(3 * var(--lh-u)); height: calc(3 * var(--lh-u)); margin-block: calc(-0.45 * var(--lh-u)); }
+.lh-faq .lh-faq__icon span{
+  position: absolute; left: 0; top: 50%; width: 100%; height: calc(0.24 * var(--lh-u)); margin-top: calc(-0.12 * var(--lh-u));
+  background: #020202; border-radius: calc(0.2 * var(--lh-u)); transition: transform var(--lh-dur) var(--lh-ease), background-color var(--lh-dur) var(--lh-ease);
+}
+.lh-faq .lh-faq__icon span:last-child{ transform: rotate(90deg); }
+.lh-faq .lh-faq__item.is-open .lh-faq__icon span:last-child{ transform: rotate(90deg) scaleX(0); }
+.lh-faq .lh-faq__item.is-open .lh-faq__icon span:first-child{ height: calc(0.4 * var(--lh-u)); margin-top: calc(-0.2 * var(--lh-u)); }
+
+/* Answer - height is animated by lh400.js */
+.lh-faq .lh-faq__panel-wrap{ height: 0; overflow: hidden; transition: height 0.35s var(--lh-ease); }
+.lh-faq .lh-faq__item.is-open .lh-faq__trigger{ padding-bottom: calc(1.2 * var(--lh-u)); }
+.lh-faq .lh-faq__answer{ max-width: calc(57.5 * var(--lh-u)); padding-bottom: calc(2 * var(--lh-u)); font: 500 calc(1.6 * var(--lh-u))/calc(1.9 * var(--lh-u)) var(--lh-font); color: var(--lh-muted); }
+.lh-faq .lh-faq__answer p + p{ margin-top: calc(0.8 * var(--lh-u)); }
+.lh-faq .lh-faq__answer a{ color: var(--lh-blue); text-decoration: underline; }
+/* Open item is already expanded before the JS runs */
+.lh-no-js .lh-faq .lh-faq__item.is-open .lh-faq__panel-wrap, .lh-faq .lh-faq__item.is-open .lh-faq__panel-wrap:not([style]){ height: auto; }
+
+@media (hover: hover) {
+  /* Hover not specified in Figma - placeholder until design confirms */
+  .lh-faq .lh-faq__trigger:hover .lh-faq__question{ color: var(--lh-blue); }
+  .lh-faq .lh-faq__trigger:hover .lh-faq__icon span{ background: var(--lh-blue); }
+}
+
+/* Mobile - no panel, list stacks under the heading */
+@media (max-width: 899px) {
+  .lh-faq .lh-faq__panel{ display: block; padding: 0; background: none; border: 0; border-radius: 0; -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .lh-faq .lh-faq__title{ max-width: calc(29.2 * var(--lh-u)); font-size: calc(2.4 * var(--lh-u)); line-height: calc(2.9 * var(--lh-u)); }
+  .lh-faq .lh-faq__list{ margin-top: calc(2.4 * var(--lh-u)); padding-top: 0; }
+  .lh-faq .lh-faq__trigger{ gap: calc(1.6 * var(--lh-u)); padding-right: 0; }
+  .lh-faq .lh-faq__question{ max-width: calc(29 * var(--lh-u)); }
+  .lh-faq .lh-faq__answer{ max-width: calc(33.8 * var(--lh-u)); }
+}

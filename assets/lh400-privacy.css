@@ -1,0 +1,45 @@
+/* ==========================================================================
+   LH400 - Privacy button
+   Figma: 1344x659 photo banner (r32), mobile 366x550
+   ========================================================================== */
+
+/* Banner */
+.lh-privacy .lh-privacy__card{ aspect-ratio: 1344 / 659; border-radius: calc(3.2 * var(--lh-u)); color: #fff; }
+.lh-privacy .lh-privacy__img{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 27.5%; transition: transform 0.8s var(--lh-ease); }
+/* 40% black fade on both sides */
+.lh-privacy .lh-privacy__shade{
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0) 100%), linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%);
+}
+/* Copy - right-aligned, 83px in from the right in Figma */
+.lh-privacy .lh-privacy__text{
+  position: relative; display: flex; flex-direction: column; align-items: flex-end; gap: calc(0.9 * var(--lh-u));
+  padding: 14.29% 6.18% calc(4 * var(--lh-u)) 0; margin-left: auto; max-width: calc(70 * var(--lh-u)); text-align: right;
+}
+.lh-privacy .lh-privacy__title{ max-width: calc(64.8 * var(--lh-u)); font: 700 calc(5.2 * var(--lh-u))/calc(6.5 * var(--lh-u)) var(--lh-font-alt); letter-spacing: calc(0.156 * var(--lh-u)); text-transform: uppercase; }
+.lh-privacy .lh-privacy__body{ max-width: calc(42 * var(--lh-u)); font: 400 calc(2.8 * var(--lh-u))/calc(3.6 * var(--lh-u)) var(--lh-font-alt); letter-spacing: calc(0.084 * var(--lh-u)); text-transform: capitalize; }
+
+/* Arrow - placed on the button in the photo, gentle bob */
+.lh-privacy .lh-privacy__arrow{ position: absolute; left: 21.95%; top: 66.6%; width: calc(4.6 * var(--lh-u)); height: calc(4.6 * var(--lh-u)); filter: drop-shadow(0 calc(0.2 * var(--lh-u)) calc(0.6 * var(--lh-u)) rgba(0, 0, 0, 0.35)); animation: lh-privacy-bob 1.8s var(--lh-ease) infinite; }
+@keyframes lh-privacy-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(calc(-0.8 * var(--lh-u))); } }
+@media (prefers-reduced-motion: reduce) { .lh-privacy .lh-privacy__arrow{ animation: none; } }
+
+/* Hover not specified in Figma - placeholder until design confirms */
+@media (hover: hover) {
+  .lh-privacy .lh-privacy__card:hover .lh-privacy__img{ transform: scale(1.02); }
+}
+
+/* Mobile - portrait crop, fades top and bottom, heading at the top and text at the bottom */
+@media (max-width: 899px) {
+  .lh-privacy .lh-privacy__card{ aspect-ratio: 366 / 550; margin-inline: calc(-0.2 * var(--lh-u)); }
+  @media (min-width: 560px) { .lh-privacy .lh-privacy__card{ max-width: calc(48 * var(--lh-u)); margin-inline: auto; } }
+  .lh-privacy .lh-privacy__img{ object-position: 21.4% 50%; }
+  .lh-privacy .lh-privacy__shade{ background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 54%, rgba(0, 0, 0, 0.5) 100%); }
+  .lh-privacy .lh-privacy__text{
+    position: absolute; inset: 0; justify-content: space-between; align-items: center; gap: 0;
+    max-width: none; margin: 0; padding: calc(2.9 * var(--lh-u)) calc(3.5 * var(--lh-u)) calc(1.7 * var(--lh-u)); text-align: center;
+  }
+  .lh-privacy .lh-privacy__title{ max-width: calc(29.1 * var(--lh-u)); font-size: calc(2 * var(--lh-u)); line-height: calc(2.5 * var(--lh-u)); letter-spacing: calc(0.06 * var(--lh-u)); }
+  .lh-privacy .lh-privacy__body{ max-width: calc(29.6 * var(--lh-u)); font-size: calc(1.4 * var(--lh-u)); line-height: calc(1.8 * var(--lh-u)); letter-spacing: calc(0.042 * var(--lh-u)); }
+  .lh-privacy .lh-privacy__arrow{ left: 26.2%; top: 62.5%; width: calc(2.3 * var(--lh-u)); height: calc(2.3 * var(--lh-u)); }
+}

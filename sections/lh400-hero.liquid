@@ -1,0 +1,136 @@
+{%- comment -%}
+  LH400 - Hero
+  Figma: hero banner (desktop 1343x563, mobile 363x470).
+  Photo with the brown fade on the left, LAVNA | LH400 lockup, title and the "Buy Now @ price" pill.
+  The pill buys the product picked in the settings and shows its live price; with no product it shows
+  the text prices and works as a normal link.
+{%- endcomment -%}
+{% render 'lh400-assets' %}
+{{ 'lh400-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign s = section.settings
+  if s.image_mobile != blank
+    assign mobile_src = s.image_mobile | image_url: width: 900
+  else
+    assign mobile_src = 'lh400-hero-mobile.jpg' | asset_url
+  endif
+-%}
+<section class="lh lh-section lh-hero" style="--pt:{{ s.padding_top }};--ptm:{{ s.padding_top_mobile }}">
+  <div class="lh-container">
+    <div class="lh-hero__media">
+      {% # Background. Room number + lock sit on the door, so they're positioned inside the art box %}
+      <div class="lh-hero__bg" aria-hidden="true">
+        <div class="lh-hero__art">
+          <picture>
+            <source media="(max-width: 899px)" srcset="{{ mobile_src }}">
+            {%- render 'lh400-image', image: s.image, fallback: 'lh400-hero.jpg', alt: '', class: 'lh-hero__img', loading: 'eager', sizes: '(min-width: 1440px) 1344px, 94vw', width: 2177, height: 882 -%}
+          </picture>
+          {%- if s.room_number != blank -%}
+            <span class="lh-hero__room">{{ s.room_number | escape }}</span>
+          {%- endif -%}
+          {%- if s.show_lock -%}
+            {%- render 'lh400-image', image: s.lock_image, fallback: 'lh400-hero-lock.png', alt: '', class: 'lh-hero__lock', loading: 'eager', width: 315, height: 462 -%}
+          {%- endif -%}
+        </div>
+        <div class="lh-hero__shade"></div>
+      </div>
+
+      {% # Copy %}
+      <div class="lh-hero__content">
+        {% # LAVNA | LH400 lockup - desktop only %}
+        <div class="lh-hero__lockup lh-desktop-only">
+          {%- render 'lh400-image', image: s.brand_logo, fallback: 'lh400-hero-logo.png', alt: 'LAVNA', class: 'lh-hero__brand', loading: 'eager', width: 306, height: 117 -%}
+          <span class="lh-hero__divider" aria-hidden="true"></span>
+          <span class="lh-hero__model">{{ s.model | escape }}</span>
+        </div>
+        {% # Figma uses different heading copy on mobile %}
+        <h1 class="lh-hero__title">
+          <span class="lh-desktop-only">{{ s.title | escape | newline_to_br }}</span>
+          <span class="lh-mobile-only">{{ s.title_mobile | escape }}</span>
+        </h1>
+        <p class="lh-hero__text">{{ s.text | escape | newline_to_br }}</p>
+        {%- if s.button_label != blank -%}
+          {%- liquid
+            # Price: live from the product when one is picked, otherwise the text settings
+            assign hero_product = s.product
+            if hero_product != blank
+              assign v = hero_product.selected_or_first_available_variant
+              # 'short' = 3,990 like the design, 'money' = store format
+              if s.price_format == 'money'
+                assign price_text = v.price | money
+                assign compare_text = v.compare_at_price | money
+              else
+                assign price_text = v.price | money_without_trailing_zeros
+                assign compare_text = v.compare_at_price | money_without_trailing_zeros
+              endif
+              # strike-through price only when there's a real discount
+              if v.compare_at_price > v.price
+                assign compare_text = compare_text | append: s.compare_suffix
+              else
+                assign compare_text = ''
+              endif
+            else
+              assign price_text = s.price | escape
+              assign compare_text = s.compare_price | escape
+            endif
+          -%}
+          {%- capture hero_btn -%}
+            <span class="lh-hero__label">{{ s.button_label | escape }}</span>
+            {%- if price_text != blank %}<span class="lh-hero__price">{{ price_text }}</span>{% endif -%}
+            {%- if compare_text != blank %}<s class="lh-hero__compare">{{ compare_text }}</s>{% endif -%}
+          {%- endcapture -%}
+          {%- # Buy now / add to cart through the shared form; plain link when no product is picked -%}
+          {%- if hero_product != blank and s.button_action != 'link' -%}
+            {%- render 'lh400-buy-button', product: hero_product, action: s.button_action, class: 'lh-btn lh-btn--primary lh-hero__btn', content: hero_btn, sold_out_label: s.sold_out_label -%}
+          {%- else -%}
+            <a class="lh-btn lh-btn--primary lh-hero__btn" href="{{ s.button_link | default: hero_product.url | default: '#' }}">{{ hero_btn }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "LH400 hero",
+  "tag": "div",
+  "class": "lh400-hero-section",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image", "label": "Background image", "info": "Leave empty to use the design image. Desktop crop is 1343 x 563." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile background image", "info": "Portrait, 363 x 470 ratio." },
+    { "type": "text", "id": "room_number", "label": "Room number on the door", "default": "205", "info": "Placed on the door of the design image; clear it when you change the image." },
+    { "type": "checkbox", "id": "show_lock", "label": "Show the lock on the door", "default": true },
+    { "type": "image_picker", "id": "lock_image", "label": "Lock image", "info": "Transparent PNG of the lock." },
+    { "type": "header", "content": "Text" },
+    { "type": "image_picker", "id": "brand_logo", "label": "Brand logo (white)", "info": "Desktop only, next to the model name." },
+    { "type": "text", "id": "model", "label": "Model", "default": "LH400" },
+    { "type": "textarea", "id": "title", "label": "Heading (desktop)", "default": "Hotel\nsmart lock" },
+    { "type": "text", "id": "title_mobile", "label": "Heading (mobile)", "default": "LAVNA LH400" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The Only Smart Door Lock Built for Your\nModern Hospitality!" },
+    { "type": "header", "content": "Button" },
+    { "type": "product", "id": "product", "label": "Product", "info": "The button buys this product, and its price, compare-at price and stock are shown live. While empty, the texts below are shown and the button opens the link." },
+    { "type": "select", "id": "button_action", "label": "When clicked", "options": [
+      { "value": "buy", "label": "Buy now (go to checkout)" },
+      { "value": "add", "label": "Add to cart (stay on the page)" },
+      { "value": "link", "label": "Open the link below" }
+    ], "default": "buy" },
+    { "type": "text", "id": "button_label", "label": "Label", "default": "Buy Now @" },
+    { "type": "select", "id": "price_format", "label": "Price format", "options": [
+      { "value": "short", "label": "Without decimals (3,990)" },
+      { "value": "money", "label": "Store format (3,990.00)" }
+    ], "default": "short" },
+    { "type": "text", "id": "compare_suffix", "label": "Text after the compare-at price", "default": "/-" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "text", "id": "price", "label": "Price (when no product is selected)", "default": "₹3,990" },
+    { "type": "text", "id": "compare_price", "label": "Compare-at price (when no product is selected)", "default": "₹8,500/-" },
+    { "type": "url", "id": "button_link", "label": "Link (when no product is selected, or 'Open the link')" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top spacing (desktop)", "min": 0, "max": 160, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top spacing (mobile)", "min": 0, "max": 100, "step": 1, "unit": "px", "default": 17 }
+  ],
+  "presets": [{ "name": "LH400 hero" }]
+}
+{% endschema %}
